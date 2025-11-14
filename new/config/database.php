@@ -15,9 +15,9 @@ return [
     // 服务器地址
     'hostname'        => env('database.hostname', '127.0.0.1'),
     // 数据库名
-    'database'        => env('database.database', 'api_jpcryptoex_v'),
+    'database'        => env('database.database', 'www_jpcryptoex_v'),
     // 用户名
-    'username'        => env('database.username', 'api_jpcryptoex_v'),
+    'username'        => env('database.username', 'www_jpcryptoex_v'),
     // 密码
     'password'        => env('database.password', 'w71Ts5Rni8imZbm9'),
     // 端口
