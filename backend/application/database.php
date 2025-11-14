@@ -15,11 +15,11 @@ return [
     // ��
     'hostname'        => '127.0.0.1',
     // ������阿达
-    'database'        => 'api_jpcryptoex_v',
+    'database'        => 'www_jpcryptoex_v',
     // ��
-    'username'        => 'api_jpcryptoex_v',
+    'username'        => 'www_jpcryptoex_v',
     // ��
-    'password'        => 't9YA4ryXHdpXidKf',
+    'password'        => 'w71Ts5Rni8imZbm9',
     // ��
     'hostport'        => '3306',
     // ��dsn

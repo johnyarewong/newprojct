@@ -1,19 +1,82 @@
 <?php
 namespace app\index\controller;
 
-class Index
+use think\Controller;
+use think\Request;
+use think\Db;
+use think\facade\Cookie;
+use think\facade\Session;
+
+class Index extends Controller
 {
-    public function index()
+    /**
+     * 应用首页，提供登录功能。
+     */
+    public function index(Request $request)
     {
-        return '<style type="text/css">*{ padding: 0; margin: 0; } 
-        div{ padding: 4px 48px;} 
-        a{color:#2E5CD5;cursor: pointer;text-decoration: none} 
-        a:hover{text-decoration:underline; } 
-        body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px;} 
-        h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } 
-        p{ line-height: 1.6em; font-size: 42px }</style>
-        <div style="padding: 24px 48px;"> 
-        <h1>:)</h1><p> ThinkPHP V5.1<br/><span style="font-size:30px">十年磨一剑 - 为API开发设计的高性能框架</span></p>
-        <span style="font-size:22px;">[ V5.1 版本由 <a href="https://www.thinkphp.cn" target="_blank">ThinkPHP官方</a> 强力驱动 ]</span></div>';
+        $errorMessage = null;
+        $successMessage = null;
+        $username = '';
+        $remember = false;
+
+        if (!$request->isPost()) {
+            $rememberedUsername = (string) Cookie::get('remember_username');
+            if ($rememberedUsername !== '') {
+                $username = $rememberedUsername;
+                $remember = true;
+            }
+        }
+
+        if ($request->isPost()) {
+            $username = trim((string) $request->post('username'));
+            $password = (string) $request->post('password');
+            $remember = $request->post('remember') ? true : false;
+
+            if ($username === '' || $password === '') {
+                $errorMessage = '请输入用户名和密码。';
+            } else {
+                try {
+                    $user = Db::name('userinfo')->where('username', $username)->find();
+                } catch (\Exception $exception) {
+                    $user = null;
+                    $errorMessage = '登录服务暂时不可用，请稍后再试。';
+                }
+
+                if (!isset($user) || $user === null) {
+                    if ($errorMessage === null) {
+                        $errorMessage = '用户名或密码错误，请重试。';
+                    }
+                } elseif ((int) $user['ustatus'] === 1) {
+                    $errorMessage = '您的账号已被禁用，请联系管理员。';
+                } else {
+                    $loginTimestamp = isset($user['utime']) ? (string) $user['utime'] : '';
+                    $expectedHash = strtolower((string) $user['upwd']);
+                    $calculatedHash = strtolower(md5($password . $loginTimestamp));
+
+                    if ($expectedHash !== $calculatedHash) {
+                        $errorMessage = '用户名或密码错误，请重试。';
+                    }
+                }
+
+                if ($errorMessage === null) {
+                    Session::set('user_id', $user['uid']);
+                    Session::set('username', $user['username']);
+                    $successMessage = '登录成功，欢迎您回来！';
+
+                    if ($remember) {
+                        Cookie::set('remember_username', $username, ['expire' => 7 * 24 * 60 * 60]);
+                    } else {
+                        Cookie::delete('remember_username');
+                    }
+                }
+            }
+        }
+
+        return $this->fetch('index/login', [
+            'errorMessage' => $errorMessage,
+            'successMessage' => $successMessage,
+            'username' => $username,
+            'remember' => $remember,
+        ]);
     }
 }
