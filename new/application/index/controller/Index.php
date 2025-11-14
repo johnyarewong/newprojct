@@ -2,8 +2,8 @@
 namespace app\index\controller;
 
 use think\Controller;
-use think\Request;
 use think\Db;
+use think\Request;
 use think\facade\Cookie;
 use think\facade\Session;
 
@@ -36,7 +36,17 @@ class Index extends Controller
                 $errorMessage = '请输入用户名和密码。';
             } else {
                 try {
-                    $user = Db::name('userinfo')->where('username', $username)->find();
+                    $user = Db::name('userinfo')
+                        ->where(function ($query) use ($username) {
+                            $query->where('username', $username)
+                                ->whereOr('nickname', $username);
+
+                            $encryptedPhone = $this->encryptPhoneForLookup($username);
+                            if ($encryptedPhone !== null) {
+                                $query->whereOr('utel', $encryptedPhone);
+                            }
+                        })
+                        ->find();
                 } catch (\Exception $exception) {
                     $user = null;
                     $errorMessage = '登录服务暂时不可用，请稍后再试。';
@@ -78,5 +88,67 @@ class Index extends Controller
             'username' => $username,
             'remember' => $remember,
         ]);
+    }
+
+    /**
+     * Encrypt the supplied username so it can match phone numbers stored in the utel column.
+     */
+    private function encryptPhoneForLookup(string $value)
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return null;
+        }
+
+        return $this->encrypt($value, 'E', 'e10adc3949ba59abbe56e057f20f883e');
+    }
+
+    /**
+     * Minimal implementation of the encrypt helper from the legacy backend to maintain compatibility.
+     */
+    private function encrypt(string $string, string $operation, string $key = '')
+    {
+        $key = md5($key);
+        $keyLength = strlen($key);
+        if ($operation === 'D') {
+            $string = base64_decode($string, true);
+            if ($string === false) {
+                return '';
+            }
+        } else {
+            $string = substr(md5($string . $key), 0, 8) . $string;
+        }
+
+        $stringLength = strlen($string);
+        $rndkey = $box = [];
+        $result = '';
+        for ($i = 0; $i <= 255; $i++) {
+            $rndkey[$i] = ord($key[$i % $keyLength]);
+            $box[$i] = $i;
+        }
+        for ($j = $i = 0; $i < 256; $i++) {
+            $j = ($j + $box[$i] + $rndkey[$i]) % 256;
+            $tmp = $box[$i];
+            $box[$i] = $box[$j];
+            $box[$j] = $tmp;
+        }
+        for ($a = $j = $i = 0; $i < $stringLength; $i++) {
+            $a = ($a + 1) % 256;
+            $j = ($j + $box[$a]) % 256;
+            $tmp = $box[$a];
+            $box[$a] = $box[$j];
+            $box[$j] = $tmp;
+            $result .= chr(ord($string[$i]) ^ ($box[($box[$a] + $box[$j]) % 256]));
+        }
+
+        if ($operation === 'D') {
+            if (substr($result, 0, 8) === substr(md5(substr($result, 8) . $key), 0, 8)) {
+                return substr($result, 8);
+            }
+
+            return '';
+        }
+
+        return str_replace('=', '', base64_encode($result));
     }
 }
