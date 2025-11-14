@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>K线</title>
+		<link rel="stylesheet" type="text/css" href="css/kline.css"/>
+			<script>
+	// 在Vue加载之前预设置环境 - 完全禁用Vue DevTools
+	window.__VUE_DEVTOOLS_GLOBAL_HOOK__ = {
+		isDisabled: true,
+		enabled: false,
+		emit: function() {},
+		on: function() {},
+		once: function() {},
+		off: function() {},
+		apps: []
+	};
+	
+	// 禁用Vue开发模式警告
+	if (typeof window !== 'undefined') {
+		window.__VUE_PROD__ = true;
+		window.__VUE_DEVTOOLS_HOST__ = undefined;
+		window.__VUE_DEVTOOLS_PORT__ = undefined;
+	}
+	
+	// 拦截可能的错误和警告
+	window.addEventListener('error', function(e) {
+		if (e.message && (
+			e.message.includes('DevtoolsBackend') || 
+			e.message.includes('emit is not a function') ||
+			e.message.includes('preventDefault')
+		)) {
+			e.preventDefault();
+			e.stopPropagation();
+			return false;
+		}
+	}, true);
+	
+	// 拦截控制台警告
+	(function() {
+		var originalWarn = console.warn;
+		console.warn = function() {
+			var args = Array.prototype.slice.call(arguments);
+			var message = args.join(' ');
+			
+			// 过滤掉 passive event listener 相关的警告
+			if (message.includes('passive event listener') || 
+			    message.includes('preventDefault') ||
+			    message.includes('[Violation]')) {
+				return; // 静默忽略
+			}
+			
+			// 其他警告正常输出
+			return originalWarn.apply(console, arguments);
+		};
+	})();
+	
+	// 解决被动事件监听器警告 - 增强版
+	(function() {
+		var supportsPassive = false;
+		try {
+			var opts = Object.defineProperty({}, 'passive', {
+				get: function() {
+					supportsPassive = true;
+				}
+			});
+			window.addEventListener('testPassive', null, opts);
+			window.removeEventListener('testPassive', null, opts);
+		} catch (e) {}
+
+		if (!supportsPassive) {
+			return; // 浏览器不支持，直接返回
+		}
+
+		// 保存原始方法
+		var originalAddEventListener = EventTarget.prototype.addEventListener;
+		var originalRemoveEventListener = EventTarget.prototype.removeEventListener;
+		
+		// 包装监听器函数，禁止在 passive 模式下调用 preventDefault
+		function wrapListener(listener, passive) {
+			if (!passive || typeof listener !== 'function') {
+				return listener;
+			}
+			
+			return function wrappedListener(event) {
+				// 保存原始的 preventDefault
+				var originalPreventDefault = event.preventDefault;
+				
+				// 重写 preventDefault 为空操作
+				event.preventDefault = function() {
+					// 在 passive 模式下，阻止 preventDefault 调用
+					if (!event.defaultPrevented) {
+						// 静默忽略，不执行任何操作
+					}
+				};
+				
+				// 调用原始监听器
+				try {
+					return listener.apply(this, arguments);
+				} finally {
+					// 恢复原始方法
+					event.preventDefault = originalPreventDefault;
+				}
+			};
+		}
+		
+		// 重写 addEventListener
+		EventTarget.prototype.addEventListener = function(type, listener, options) {
+			var useCapture = false;
+			var passive = false;
+			
+			// 处理 options 参数
+			if (typeof options === 'boolean') {
+				useCapture = options;
+			} else if (typeof options === 'object' && options !== null) {
+				useCapture = options.capture || false;
+				passive = options.passive !== undefined ? options.passive : false;
+			}
+			
+			// 对于触摸和滚轮事件，默认使用 passive
+			var passiveEvents = ['touchstart', 'touchmove', 'touchend', 'touchcancel', 'mousewheel', 'wheel', 'scroll'];
+			if (passiveEvents.indexOf(type) !== -1) {
+				if (typeof options !== 'object' || options === null || options.passive === undefined) {
+					passive = true;
+				}
+			}
+			
+			// 构建新的 options
+			var newOptions = typeof options === 'object' && options !== null ? options : {};
+			newOptions.passive = passive;
+			newOptions.capture = useCapture;
+			
+			// 包装监听器
+			var wrappedListener = wrapListener(listener, passive);
+			
+			// 存储映射关系（用于 removeEventListener）
+			if (!this.__eventListenerMap) {
+				this.__eventListenerMap = new WeakMap();
+			}
+			if (listener && typeof listener === 'function') {
+				this.__eventListenerMap.set(listener, wrappedListener);
+			}
+			
+			return originalAddEventListener.call(this, type, wrappedListener, newOptions);
+		};
+		
+		// 重写 removeEventListener
+		EventTarget.prototype.removeEventListener = function(type, listener, options) {
+			var actualListener = listener;
+			
+			// 尝试获取包装后的监听器
+			if (this.__eventListenerMap && listener) {
+				var wrapped = this.__eventListenerMap.get(listener);
+				if (wrapped) {
+					actualListener = wrapped;
+				}
+			}
+			
+			return originalRemoveEventListener.call(this, type, actualListener, options);
+		};
+	})();
+	</script>
+	</head>
+
+	<body style="background: transparent; margin: 0; padding: 0;">
+		<div id="app">
+			<!-- 加载状态 -->
+			<div class="loading-placeholder" v-show="!txData.lastPrice" style="padding: 20px 16px; text-align: center; color: rgba(255,255,255,0.6); font-size: 14px;">
+				{{loadingText}}
+			</div>
+			<div class="head" style="padding-top: 0;" v-show="txData.lastPrice">
+				<div class="price">
+					<span class="price-label" :class="txData.upFlag==1?'price-green':'price-red'">{{txData.lastPrice}}</span>
+					<!-- <span class="price-value">≈ ${{txData.lastPrice}}</span> -->
+				</div>
+				<div class="price-stats">
+					<div class="head-item-cell">
+						<span class="hic-label">Open</span>
+						<span class="hic-value" :class="txData.upFlag==1?'price-green':'price-red'">{{txData.volume}}</span>
+					</div>
+					<div class="head-item-cell">
+						<span class="hic-label">24H Low</span>
+						<span class="hic-value" :class="txData.upFlag==1?'price-green':'price-red'">{{txData.low}}</span>
+					</div>
+					<div class="head-item-cell high-price-cell">
+						<span class="hic-label">24H High</span>
+						<span class="hic-value high-price-value" :class="txData.upFlag==1?'price-green':'price-red'">{{txData.high}}</span>
+					</div>
+				</div>
+				<!-- <div class="head-item">
+					<div class="head-item-cell">
+						<span class="hic-label">最高</span>
+						<span class="hic-value" :class="txData.upFlag==1?'price-green':'price-red'">{{txData.high || 0}}</span>
+					</div>
+				</div>
+				<div class="head-item">
+					<div class="head-item-cell">
+						<span class="hic-label">开盘</span>
+						<span class="hic-value" :class="txData.upFlag==1?'price-green':'price-red'">{{txData.volume || 0}}</span>
+					</div>
+					<div class="head-item-cell">
+						<span class="hic-label">最低</span>
+						<span class="hic-value" :class="txData.upFlag==1?'price-green':'price-red'">{{txData.low || 0}}</span>
+					</div>
+				</div> -->
+			</div>
+			<!-- 新闻滚动区域 -->
+			<div class="news-scroll-container">
+				<div class="news-scroll-wrapper">
+					<div class="news-item" v-for="(news, index) in visibleNews" :key="index">
+						<span class="news-icon">📢</span>
+						<span class="news-text">{{news}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="tabs">
+				<div @click="switchTab(item.value)" class="tabs-item" :class="{'tabs-item-active':current==item.value}" v-for="(item,index) in tabs" :key="index">
+					<span class="tabs-item-text" :class="{'tabs-item-text-active':current==item.value}">{{item.label}}</span>
+				</div>
+			</div>
+			<div class="charts-border">
+				<div id="main" class="charts"></div>
+				<div class="charts-label" v-show="MA5">
+					<div class="charts-MA5">MA5:{{MA5}}</div>
+					<div class="charts-MA10">MA10:{{MA10}}</div>
+					<div class="charts-MA30">MA30:{{MA30}}</div>
+				</div>
+				<div class="charts-bar-label" v-show="volMA5">
+					<div class="charts-MA5">MA5:{{volMA5}}</div>
+					<div class="charts-MA10">MA10:{{volMA10}}</div>
+				</div>
+			</div>
+			<!-- <div class="btns">
+				<div @click="back1" class="btn btn-green">买入</div>
+				<div @click="back2" class="btn btn-red">卖出</div>
+			</div> -->
+		</div>
+		<script type="text/javascript" src="js/uni.webview.1.5.2.js"></script>
+		<script type="text/javascript" src="js/echarts-passive-fix.js"></script>
+		<script type="text/javascript" src="js/echarts.min.js"></script>
+		<script type="text/javascript" src="js/qs.js"></script>
+		<script type="text/javascript" src="js/axios.js"></script>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript" src="js/mock.js"></script>
+		<script type="text/javascript" src="js/kline.js"></script>
+	</body>
+	<script>
+		// 检测并应用主题
+		function checkTheme() {
+			try {
+				// 尝试从 localStorage 获取主题
+				var theme = localStorage.getItem('theme') || 'dark';
+				
+				// 应用主题到 body
+				if (theme === 'light') {
+					document.body.classList.add('theme-light');
+				} else {
+					document.body.classList.remove('theme-light');
+				}
+			} catch (e) {
+				console.log('Theme check error:', e);
+			}
+		}
+
+		// 页面加载时检查主题
+		checkTheme();
+
+		// 监听主题变化
+		window.addEventListener('storage', function(e) {
+			if (e.key === 'theme') {
+				checkTheme();
+			}
+		});
+
+		// 定期检查主题（用于同步更新）
+		setInterval(checkTheme, 1000);
+	</script>
+</html>

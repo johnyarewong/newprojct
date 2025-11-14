@@ -1,0 +1,109 @@
+@charset "utf-8";
+*, *:before, *:after { max-height: 100000px }
+* a { text-decoration: none }
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: " ";
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix{
+    *zoom: 1;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.alignC{
+	text-align:center;
+}
+.alignL{
+	text-align: left;
+}
+.alignR{
+	text-align: right;
+}
+.block{
+	display: block;
+}
+a,a:link,a:visited,a:hover,a:active{
+  text-decoration: none;
+
+}
+.inline-block{
+	display: inline-block;
+}
+.inline{
+	display: inline;
+}
+.table{
+	display: table;
+}
+.img-responsive{
+	display: block;
+	width: 100%;
+	height: auto;
+	max-width:100%;
+}
+/* 禁止换行,超出省略号 */
+.noWrapEllipsis{
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+/* 文字两端对齐 */
+.text-justify{
+	text-align:justify;
+	text-justify:inter-ideograph;
+}
+/* 定义盒模型为 flex布局兼容写法并让内容水平垂直居中 */
+.flex{
+	display:-webkit-box;
+	display:-webkit-flex;
+	display:-ms-flexbox;
+	display:flex;
+}
+/*flex-v：盒模型垂直布局*/
+.flex-v{
+	-webkit-box-orient:vertical;
+	-webkit-flex-direction:column;
+	-ms-flex-direction:column;
+	flex-direction:column;
+}
+/* flex-1：子元素占据剩余的空间*/
+.flex-1{
+	-webkit-box-flex:1;
+	-webkit-flex:1;
+	-ms-flex:1;flex:1;
+	color:#fff;
+}
+/*flex-align-center：子元素垂直居中*/
+.flex-align-center{
+	-webkit-box-align:center;
+	-webkit-align-items:center;
+	-ms-flex-align:center;
+	align-items:center;
+}
+/*flex-pack-center：子元素水平居中*/
+.flex-pack-center{
+	-webkit-box-pack:center;
+	-webkit-justify-content:center;
+	-ms-flex-pack:center;
+	justify-content:center;
+}
+/*flex-pack-justify：子元素两端对齐*/
+.flex-pack-justify{
+	-webkit-box-pack:justify;
+	-webkit-justify-content:space-between;
+	-ms-flex-pack:justify;
+	justify-content:space-between;
+}
+.row-wrap{
+	-webkit-flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;
+}

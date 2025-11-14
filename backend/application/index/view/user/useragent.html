@@ -1,0 +1,347 @@
+<html style="font-size: 120px;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!-- 是否启用全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 全屏时状态颜色设置 -->
+    <meta name="apple-mobile-web-status-bar-style" content="white">
+    <!-- 禁用电话号码自动识别 -->
+    <meta name="format-detection" content="telephone=no">
+    <!--禁止读取本地缓存模板-->
+    <meta http-equiv="Pragma" contect="no-cache">
+    <!-- iPhone 启动图标 -->
+    <link rel="apple-touch-icon" href="img/logo.png">
+    <!-- Android 启动图标 -->
+    <link rel="shortcut icon" href="img/logo.png">
+    <!-- 添加 favicon icon -->
+    <link rel="shortcut icon" type="image/ico" href="img/favicon.ico">
+    <!--<title>微交易</title> -->
+    <script type="text/javascript">
+        window.onload=function(){
+//设置适配rem
+            var change_rem = ((window.screen.width > 450) ? 450 : window.screen.width)/375*100;
+            document.getElementsByTagName("html")[0].style.fontSize=change_rem+"px";
+            window.onresize = function(){
+                change_rem = ((window.screen.width > 450) ? 450 : window.screen.width)/375*100;
+                document.getElementsByTagName("html")[0].style.fontSize=change_rem+"px";
+            }
+        }
+    </script>
+
+    <link href="/static/index/css/ionic.css" rel="stylesheet">
+    <link href="/static/index/css/style.css" rel="stylesheet">
+    <!-- <script src="/static/index/js/jquery-3.2.1.min.js"></script> -->
+    <script src="/static/index/js/jquery-1.9.1.min.js"></script>
+    <style type="text/css">
+        [ng\:cloak],
+        [ng-cloak],
+        [data-ng-cloak],
+        [x-ng-cloak],
+        .ng-cloak,
+        .x-ng-cloak,
+        .ng-hide:not(.ng-hide-animate) {
+            display: none !important;
+        }
+
+        ng\:form {
+            display: block;
+        }
+
+        .ng-animate-shim {
+            visibility: hidden;
+        }
+
+        .ng-anchor {
+            position: absolute;
+        }
+    </style>
+    <style>
+        .ionic_toast {
+            z-index: 9999;
+        }
+
+        .toast_section {
+            color: #FFF;
+            cursor: default;
+            font-size: 1em;
+            display: none;
+            border-radius: 5px;
+            opacity: 1;
+            padding: 10px 30px 10px 10px;
+            margin: 10px;
+            position: fixed;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 9999;
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+
+        .ionic_toast_top {
+            top: 10px;
+        }
+
+        .ionic_toast_middle {
+            top: 40%;
+        }
+
+        .ionic_toast_bottom {
+            bottom: 10px;
+        }
+
+        .ionic_toast_close {
+            border-radius: 2px;
+            color: #CCCCCC;
+            cursor: pointer;
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .toast_close_icon {
+            position: relative;
+            top: 1px;
+        }
+
+        .ionic_toast_sticky .ionic_toast_close {
+            display: block;
+        }
+
+        .ionic_toast_close:active {}
+    </style>
+    <style>
+        .tabs a {
+            color: gray;
+            line-height: 20px;
+        }
+
+        .tabs a.active {
+            color: rgb(73, 111, 254)
+        }
+
+        .tabs a.active path {
+            fill: rgb(73, 111, 254)
+        }
+
+        html,
+        body {
+            overflow: auto !important;
+            margin-bottom: 20px;
+        }
+
+        .tab-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .header {
+            background: rgb(73, 111, 254);
+            color: white;
+            text-align: right;
+            padding: 10px;
+            line-height: 30px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+
+
+    <script src="/static/index/js/lk/order.js"></script>
+
+    <!-- <script type="text/javascript" src="/static/index/js/lk/echarts-all-3.js"></script>
+<script type="text/javascript" src="/static/index/js/lk/ecStat.min.js"></script>
+<script type="text/javascript" src="/static/index/js/lk/dataTool.min.js"></script>
+<script type="text/javascript" src="/static/index/js/lk/china.js"></script>
+<script type="text/javascript" src="/static/index/js/lk/world.js"></script>
+<script type="text/javascript" src="/static/index/js/lk/api"></script>
+<script type="text/javascript" src="/static/index/js/lk/getscript"></script>
+<script type="text/javascript" src="/static/index/js/lk/bmap.min.js"></script> -->
+    <!-- 弹框插件 -->
+    <script src="/static/layer/layer.js"></script>
+    <!-- 公共函数 -->
+    <script src="/static/public/js/function.js"></script>
+    <script src="/static/public/js/base64.js"></script>
+    <script type="text/javascript">
+        var Base64 = new Base64();
+    </script>
+    <script>
+        var charturl = '/index/user/getchart.html';
+        $.get(charturl,function(_res){
+            var res = jQuery.parseJSON(Base64.decode(_res));
+            $.each(res,function(k,v){
+                $('.'+k).html(v);
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        //iOS Web APP中点击链接跳转到Safari 浏览器新标签页的问题 devework.com
+        //stanislav.it/how-to-prevent-ios-standalone-mode-web-apps-from-opening-links-in-safari
+        if(("standalone" in window.navigator) && window.navigator.standalone){
+            var noddy, remotes = false;
+            document.addEventListener('click', function(event) {
+                noddy = event.target;
+                while(noddy.nodeName !== "A" && noddy.nodeName !== "HTML") {
+                    noddy = noddy.parentNode;
+                }
+                if('href' in noddy && noddy.href.indexOf('http') !== -1 && (noddy.href.indexOf(document.location.host) !== -1 || remotes))
+                {
+                    event.preventDefault();
+                    document.location.href = noddy.href;
+                }
+            },false);
+        }
+
+
+    </script>
+
+</head>
+
+
+<script>
+    var pay_type = '';
+    var wxpay_info = '';
+    var returnrul = "/index/user/index.html";
+</script>
+
+
+<script>
+    var pay_type = '';
+    var wxpay_info = '';
+    var returnrul = "/index/user/index.html";
+</script>
+<style type="text/css">
+    .on[data-v-28ad7794] {
+        color: #002856;
+        font-size: 12px;
+    }
+
+    .in[data-v-28ad7794] {
+        color: #90a2b0;
+        font-size: 12px;
+    }
+
+    .box[data-v-28ad7794] {
+        position: fixed;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        left: 0;
+        font-size: 0.22rem;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        background: #fff;
+        z-index: 100;
+    }
+
+    .box .li[data-v-28ad7794] {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .box .li img[data-v-28ad7794] {
+        width: 20px;
+        height: 20px;
+    }
+
+    .box .li span[data-v-28ad7794] {
+        font: 12px;
+        height: 20px;
+        line-height: 20px;
+    }
+</style>
+<style type="text/css">
+    a {
+        text-decoration: none;
+    }
+</style>
+
+<div id="app">
+    <div data-v-45ed8902="" class="mybox">
+        <div data-v-28ad7794="" data-v-fb4b8be8="" class="box">
+            <div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794=""
+                                                             href="{:Url('/index/index/index/token/'.$token)}" class="li"><img data-v-28ad7794="" src="/tu/ico/sy.png" alt="">
+                <span data-v-28ad7794="" class="in">{:lang('sy')}</span></a></div>
+            <!--div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794=""
+                                                             href="{:Url('/index/index/hangqing/token/'.$token)}" class="li"><img data-v-28ad7794="" src="/tu/ico/hq.png" alt="">
+                <span data-v-28ad7794="" class="in">{:lang('hq')}</span></a></div-->
+            <div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794="" href="{:Url('/index/order/lixibao/token/'.$token)}"
+                                                             class="li"><img data-v-28ad7794="" src="/tu/ico/lc.png" alt="">
+                <span data-v-28ad7794="" class="in">{:lang('lc')}</span></a></div>
+            <div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794="" href="{:url('/index/user/kf/token/'.$token)}"
+                                                              class="li"><img data-v-28ad7794="" src="/tu/ico/kf.png" alt="">
+                <span data-v-28ad7794="" class="in">{:lang('kf')}</span></a></div>
+            <div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794=""
+                                                             href="{:Url('/index/user/index/token/'.$token)}" class="li"><img data-v-28ad7794="" src="/tu/ico/my1.png" alt="">
+                <span data-v-28ad7794="" class="on">{:lang('wd')}</span></a></div>
+        </div>
+        <style>
+            .scroll-content {
+                overflow: scroll
+            }
+        </style>
+
+        <body ng-app="starter" ng-controller="AppCtrl"
+              class="navbar grade-a platform-browser platform-ios platform-ios9 platform-ios9_1 platform-ready">
+
+        <ion-nav-view class="view-container" nav-view-transition="ios" nav-view-direction="none" nav-swipe="">
+            <ion-tabs class="tabs-icon-top navbar pane tabs-bottom tabs-standard" abstract="true" nav-view="active"
+                      style="opacity: 1; transform: translate3d(0%, 0px, 0px);">
+                <ion-nav-bar class="bar-stable headerbar nav-bar-container" nav-bar-transition="ios"
+                             nav-bar-direction="swap" nav-swipe="">
+
+                    <div class="nav-bar-block" nav-bar="active">
+                        <ion-header-bar class="bar-stable headerbar bar bar-header" align-title="center">
+                            <div class="title title-center header-item"
+                                 style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">{:lang('wdxx')}</div>
+                        </ion-header-bar>
+                    </div>
+                </ion-nav-bar>
+
+                <ion-content
+                        class="personalbg scroll-content ionic-scroll scroll-content-false  has-header has-tabs"
+                        scroll="false" style="margin-top: 10% ;">
+                    {volist name="list" id="vo"}
+                    <div class="user_btn">
+                        <h5>用户ID：{:$vo.uid}</h5>
+                        <h5>用户名：{:$vo.username}</h5>
+                        <h5>当前余额：{:$vo.usermoney}</h5>
+                    </div>
+                    {/volist}
+
+
+                </ion-content>
+
+            </ion-tabs>
+        </ion-nav-view>
+        
+        </body>
+
+</html>
+<div id="zypay_post"></div>
+<script src="/static/index/js/lk/user.js"></script>
+<script src="/static/index/js/lk/jquery.qrcode.js"></script>
+<script src="/static/index/js/lk/utf.js"></script>
+<script>
+
+</script>

@@ -1,0 +1,35 @@
+{include file="head" /}
+<body ng-app="starter" ng-controller="AppCtrl" class="grade-a platform-browser platform-win32 platform-ready">
+<ion-nav-bar class="bar-stable headerbar nav-bar-container" nav-bar-transition="ios" nav-bar-direction="none" nav-swipe="">
+<div class="nav-bar-block" nav-bar="cached"><ion-header-bar class="bar-stable headerbar bar bar-header" align-title="center">
+<div class="title title-center hangqing header-item" style="transition-duration: 0ms; transform: translate3d(-176.414px, 0px, 0px); opacity: 0;"></div>
+<div class="buttons buttons-right" style="transition-duration: 0ms; opacity: 0;"></div></ion-header-bar></div><div class="nav-bar-block" nav-bar="active">
+<ion-header-bar class="bar-stable headerbar bar bar-header" align-title="center"><div class="buttons buttons-left" style="transition-duration: 0ms;"></div>
+<div class="title hangqing title-center header-item" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);"></div></ion-header-bar></div></ion-nav-bar>
+<ion-nav-view class="view-container" nav-view-transition="ios" nav-view-direction="enter" nav-swipe="">
+<ion-tabs class="tabs-icon-top navbar pane tabs-bottom tabs-standard" abstract="true" nav-view="active" style="opacity: 1; transform: translate3d(0%, 0px, 0px);">
+<div class="tab-nav tabs">
+  <ion-tab href="#/tab/qoute" class="iconfont icon--6 tabnone"></ion-tab>
+  <ion-tab href="#/tab/history/0" class="iconfont icon--7 tabnone"></ion-tab>
+  <ion-tab href="#/tab/profile" class="iconfont icon--8 tabnone"></ion-tab>
+  
+	<a href="{:Url('/index/index/index/token/'.$token)}"  class="iconfont icon--6 tabnone tab-item " style=""><span class="tab-title ng-binding hangqing" >商品行情</span></a>
+	<a href="{:url('/index/order/hold/token/'.$token)}" class="iconfont icon--7 tabnone tab-item " style=""><span class="tab-title ng-binding jiaoyijilu" >交易记录</span></a>
+	<a href="{:url('/index/user/index/token/'.$token)}"  class="iconfont icon--8 tabnone tab-item " style=""><span class="tab-title ng-binding" >个人账户</span></a>
+	<link rel="stylesheet" type="text/css" href="/css/iconfont.css">
+	<a href="{:url('/index/index/center/token/'.$token)}"  class="iconfont icon-zhuye tabnone tab-item tab-item-active" style=""><span class="tab-title ng-binding" >活动中心</span></a>
+
+</div>
+<div style="background:url('/static/center/hdzx.jpg') center center;background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed; width:100%; height:100%;"></div>
+<script>
+
+var charturl = '{:url("getchart")}';
+$.get(charturl,function(_res){
+    var res = jQuery.parseJSON(Base64.decode(_res)); 
+    $.each(res,function(k,v){
+        $('.'+k).html('活动中心');
+    })
+})
+</script>
+</body>
+</html>

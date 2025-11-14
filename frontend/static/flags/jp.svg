@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20">
+  <!-- 白色背景 -->
+  <rect width="30" height="20" fill="#ffffff"/>
+  <!-- 红色圆圈 -->
+  <circle cx="15" cy="10" r="6" fill="#bc002d"/>
+</svg>

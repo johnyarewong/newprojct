@@ -1,0 +1,498 @@
+body {
+	font-family: "Microsoft YaHei";
+	background-color: #ffffff;
+}
+.user-center-main{
+	overflow: scroll;
+}
+.user-center{
+	background-color: #ffffff;	
+}
+.user-center .header {
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	overflow: hidden;
+	background-color: #131f30;
+	position: relative;
+}
+
+.user-center .header .title {
+	padding: 0 60px;
+	font-size: 16px;
+	color: #fff;
+	text-align: center;
+	line-height: 50px;
+}
+
+.user-center .header .headerL {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	padding-left: 15px;
+}
+
+.user-center .header .headerL img {
+	display: inline-block;
+	width: 18px;
+}
+
+.user-center .header .headerR {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding-right: 15px;
+	font-size: 12px;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*E 资讯*/
+/*S 个人中心*/
+.my-center-head {
+	width: 100%;
+	background-color: #081724;
+	position: relative;
+}
+
+.my-center-head .user {
+	padding: 25px 4% 25px 8%;
+	background-color: #ffffff;
+}
+
+.my-center-head .img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.my-center-head .img img {
+	width: 100%;
+	height: 100%;
+}
+
+.my-center-head .userinfo {
+	padding-left: 45px;
+}
+
+.my-center-head .userinfo dt {
+	font-size: 14px;
+	color: #000000;
+	font-weight: 700;
+}
+
+.my-center-head .userinfo dd {
+	font-size: 12px;
+	color: #000000;
+	word-break: break-all;
+}
+
+.my-center-head .userinfo .big {
+	font-size: 14px;
+}
+
+.my-center-head .set-link {
+	width: 62px;
+	height: 20px;
+	line-height: 18px;
+	border-radius: 20px;
+	font-size: 12px;
+	color: #000000;
+	/*text-align: center;*/
+	border: 1px solid #131f30;
+	background-color: #ffffff;
+	position: absolute;
+	right: 4%;
+	top: 12px;
+}
+
+.my-center-head .set-link img {
+	display: inline-block;
+	margin-top: -3px;
+	margin-right: 3px;
+}
+
+.my-center-head .usdt {
+	padding: 8px 4%;
+	background-color: #ffffff;
+}
+
+.my-center-head .usdt dl {
+	width: 50%;
+	text-align: center;
+}
+
+.my-center-head .usdt dl:first-child {
+	border-right: 1px solid #081724;
+}
+
+.my-center-head .usdt dt {
+	font-size: 12px;
+	color: #000000;
+}
+
+.my-center-head .usdt dd {
+	font-size: 14px;
+	color: #000000;
+	margin-top: 5px;
+}
+
+.my-center-section2 {
+	padding: 10px 4%;
+	border-bottom: 1px solid #A9A9A9;
+}
+
+.my-center-section2 .links {
+	margin-top: 10px;
+}
+
+.my-center-section2 .links li {
+	width: 48%;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+}
+
+.my-center-section2 .links .link1 {
+	background: -webkit-linear-gradient(#ed7277, #f2a069);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(#ed7277, #f2a069);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(#ed7277, #f2a069);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(#ed7277, #f2a069);
+	/* 标准的语法 */
+}
+
+.my-center-section2 .links .link2 {
+	background: -webkit-linear-gradient(#8185f7, #669cf5);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(#8185f7, #669cf5);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(#8185f7, #669cf5);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(#8185f7, #669cf5);
+	/* 标准的语法 */
+}
+
+.my-center-section3 .icon-img {
+	display: inline-block;
+	width: 20px;
+	margin-top: -3px;
+	margin-right: 3px;
+}
+
+.my-center-section3 .common-module .left {
+	font-size: 14px;
+}
+
+.down-btn {
+	width: 92%;
+	margin: 15px auto;
+}
+
+.down-btn img {
+	display: inline-block;
+	width: 21px;
+	margin-top: -3px;
+	margin-right: 3px;
+}
+
+/*E 个人中心*/
+/*S 设置*/
+.common-module {
+	padding: 5px 4%;
+	border-bottom: 1px solid #A9A9A9;
+	background: url(../img/icon-right.png) 96% center no-repeat;
+	background-size: 8px 16px;
+	
+}
+
+.common-module .left {
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	color: #000000;
+	
+}
+
+.common-module .right {
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	color: #888;
+	padding-right: 16px;
+}
+
+.common-module .tx-img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 1px solid #f5f5f5;
+}
+
+.borderB15 {
+	border-bottom: 2px solid #081724;
+}
+
+.setting-btn {
+	width: 92%;
+	margin: 18px auto;
+}
+
+.setting-btn img {
+	margin-right: 8px;
+	margin-top: -3px;
+}
+
+/*E 设置*/
+/*S 首页*/
+.index-head {
+	width: 100%;
+	padding: 12px 0;
+	background: url(../images/index/header-bg.png) no-repeat;
+	background-size: cover;
+	position: relative;
+    z-index: 10;
+    margin-bottom: 70px;
+}
+
+.index-head .property {
+	font-size: 12px;
+	color: #fff;
+	line-height: 1;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.index-head .property .tx {
+	display: inline-block;
+	width: 55px;
+	height: 55px;
+	border-radius: 50%;
+}
+
+.index-head .property dd {
+	margin-top: 5px;
+}
+
+.index-head .property dd.big {
+	font-size: 24px;
+}
+
+.index-head .items {
+	margin-top: 15px;
+    width: 92%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 10px 0;
+    border-radius: 15px;
+    justify-content: space-around;
+    position: absolute;
+    bottom: -56px;
+	left: 4%;
+	box-shadow: 0px 3px 4px 0 #f3f3f3
+}
+
+.index-head .items li {
+	width: 50px;
+	text-align: center;
+	font-size: 14px;
+	color: #a3a3a3;
+	border-radius: 3px;
+}
+.index-head .items li a em{
+	display: block;
+	width: 50px;
+	margin-bottom: 10px;
+}
+.index-notice {
+	width: 100%;
+	padding: 0 4%;
+	border-bottom: 10px solid #e6e6e6;
+}
+
+.index-notice .headline {
+	width: 45px;
+	height: 30px;
+	line-height: 28px;
+	font-size: 16px;
+	color: #eb2929;
+	font-weight: 700;
+	text-align: center;
+	border: 1px solid #eb2929;
+	border-radius: 3px;
+	margin-top: 10px;
+}
+
+.notice-wrap {
+	height: 50px;
+	line-height: 50px;
+	padding-left: 5px;
+	font-size: 14px;
+	color: #353535;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.index-hot .title {
+	font-size: 14px;
+	color: #353535;
+	text-align: center;
+	padding: 15px 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+
+.index-hot .title img {
+	display: inline-block;
+	width: 10px;
+	margin-top: -3px;
+	margin-right: 3px;
+}
+
+.index-hot .items {
+	padding: 0 4%;
+}
+
+.index-hot .items li {
+	width: 33.3%;
+	font-size: 12px;
+	color: #aaa;
+	text-align: center;
+	padding: 12px 0;
+}
+
+.index-hot .items li:after {
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 3px;
+	margin-top: -3px;
+	width: 0px;
+	height: 0px;
+	border-left: 4px solid transparent;
+	border-top: 4px solid;
+	border-right: 4px solid transparent;
+}
+
+.index-deal-item {
+	padding: 10px 4%;
+	
+	align-items: center;
+}
+
+.index-deal-item .inner {
+	text-align: center;
+}
+
+.index-deal-item .img {
+	width: 46px;
+	height: 46px;
+	line-height: 44px;
+	text-align: center;
+	border-radius: 50%;
+	background-color: #fff;
+}
+
+.index-deal-item .img img {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}
+
+.index-deal-item .name {
+	font-size: 16px;
+	color: #000;
+	font-weight: 700;
+	padding-left: 8px;
+}
+
+.index-deal-item .price {
+	font-size: 16px;
+	color: #000;
+	font-weight: 700;
+}
+
+.index-deal-item .price dd {
+	font-size: 12px;
+	color: #aaa;
+	font-weight: normal;
+	margin-top: 4px;
+}
+
+.index-deal-item .percent {
+	width: 84px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
+	color: #fff;
+	font-weight: 700;
+	background-color: #aaa;
+	border-radius: 3px;
+}
+
+.index-deal-item .percent.fall {
+	background-color: #f8673b;
+}
+
+.index-deal-item .percent.rise {
+	background-color: #06c488;
+}
+
+/*E 首页*/
+
+/*S 个人中心-新增*/
+.modal {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .6);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 10001;
+	transition: all .2s;
+	-webkit-transition: all .2s;
+	transform: scale(1.2);
+	opacity: 0;
+	pointer-events: none;
+}
+
+.modal.show {
+	transform: scale(1);
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.modal-body {
+	position: fixed;
+	width: 80%;
+	left: 10%;
+	top: 15%;
+	background-size: 100%;
+}
+
+.modal-body .code-img {
+	position: absolute;
+	left: 19%;
+	top: 22%;
+	width: 65%;
+}

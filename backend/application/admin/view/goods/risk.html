@@ -1,0 +1,406 @@
+{include file="head" /}
+
+{include file="menu" /}
+
+<style>
+/* 风控页面专属样式 - 精美科技风 */
+
+/* 确保主内容区域背景延伸到底部 */
+#main-content {
+    min-height: auto !important;
+    padding-bottom: 20px !important;
+}
+
+.wrapper {
+    min-height: auto !important;
+}
+
+.risk-management-container {
+    padding: 15px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: auto;
+}
+
+.risk-panel {
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(29, 53, 97, 0.95)) !important;
+    border: 1px solid rgba(0, 162, 255, 0.35) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 
+                0 0 20px rgba(0, 162, 255, 0.15) !important;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.risk-panel-header {
+    background: linear-gradient(135deg, rgba(0, 162, 255, 0.25), rgba(124, 77, 255, 0.20)) !important;
+    padding: 12px 20px;
+    border-bottom: 2px solid rgba(0, 162, 255, 0.4) !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.risk-panel-header i {
+    font-size: 20px;
+    color: #00a2ff;
+    text-shadow: 0 0 15px rgba(0, 162, 255, 0.6);
+}
+
+.risk-panel-header h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #00a2ff;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(0, 162, 255, 0.4);
+}
+
+.risk-form-body {
+    padding: 20px 25px;
+}
+
+.risk-form-group {
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.risk-label-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 8px;
+}
+
+.risk-label-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: #fff;
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
+.risk-label-icon.loss {
+    background: linear-gradient(135deg, #ff6b6b, #fa5252);
+}
+
+.risk-label-icon.win {
+    background: linear-gradient(135deg, #20c997, #2f9e44);
+}
+
+.risk-label-icon.min {
+    background: linear-gradient(135deg, #ffd43b, #f59f00);
+}
+
+.risk-label-icon.chance {
+    background: linear-gradient(135deg, #6f42c1, #6610f2);
+}
+
+.risk-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e9ecef;
+    letter-spacing: 0.3px;
+    margin: 0;
+}
+
+.risk-input-wrapper {
+    position: relative;
+}
+
+.risk-form-control {
+    width: 100%;
+    height: 40px;
+    background: rgba(0, 162, 255, 0.08) !important;
+    border: 2px solid rgba(0, 162, 255, 0.25) !important;
+    border-radius: 8px !important;
+    color: #e9ecef !important;
+    font-size: 14px !important;
+    padding: 8px 15px !important;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.risk-form-control:hover {
+    background: rgba(0, 162, 255, 0.12) !important;
+    border-color: rgba(0, 162, 255, 0.45) !important;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2),
+                0 4px 12px rgba(0, 162, 255, 0.2);
+}
+
+.risk-form-control:focus {
+    outline: none !important;
+    background: rgba(0, 162, 255, 0.15) !important;
+    border-color: #00a2ff !important;
+    box-shadow: 0 0 0 4px rgba(0, 162, 255, 0.2),
+                inset 0 2px 6px rgba(0, 0, 0, 0.2),
+                0 6px 16px rgba(0, 162, 255, 0.3);
+    color: #ffffff !important;
+}
+
+.risk-textarea {
+    height: 80px !important;
+    resize: vertical;
+    font-family: 'Consolas', 'Monaco', monospace !important;
+    line-height: 1.5 !important;
+}
+
+.risk-info-box {
+    margin-top: 8px;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.12), rgba(250, 82, 82, 0.08)) !important;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-left: 3px solid #ff6b6b;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.1);
+}
+
+.risk-info-box.warning {
+    background: linear-gradient(135deg, rgba(255, 212, 59, 0.12), rgba(245, 159, 0, 0.08)) !important;
+    border-color: rgba(255, 212, 59, 0.3);
+    border-left-color: #ffd43b;
+    box-shadow: 0 4px 12px rgba(255, 212, 59, 0.1);
+}
+
+.risk-info-box.info {
+    background: linear-gradient(135deg, rgba(0, 162, 255, 0.12), rgba(0, 102, 204, 0.08)) !important;
+    border-color: rgba(0, 162, 255, 0.3);
+    border-left-color: #00a2ff;
+    box-shadow: 0 4px 12px rgba(0, 162, 255, 0.1);
+}
+
+.risk-info-box strong {
+    color: #ffd43b;
+    font-weight: 600;
+    margin-right: 6px;
+    font-size: 13px;
+}
+
+.risk-info-box span {
+    color: #e0e6ed;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.risk-submit-wrapper {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.risk-submit-btn {
+    min-width: 150px;
+    height: 42px;
+    background: linear-gradient(135deg, #00a2ff, #0066cc) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 162, 255, 0.35),
+                inset 0 1px 3px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.risk-submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.risk-submit-btn:hover {
+    background: linear-gradient(135deg, #0088dd, #0055bb) !important;
+    box-shadow: 0 8px 28px rgba(0, 162, 255, 0.5),
+                inset 0 1px 3px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.risk-submit-btn:hover::before {
+    left: 100%;
+}
+
+.risk-submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 162, 255, 0.4);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .risk-management-container {
+        padding: 10px 8px;
+    }
+    
+    .risk-form-body {
+        padding: 15px 12px;
+    }
+    
+    .risk-label {
+        font-size: 13px;
+    }
+    
+    .risk-form-control {
+        height: 38px;
+        font-size: 13px !important;
+    }
+    
+    .risk-form-group {
+        margin-bottom: 15px;
+    }
+}
+</style>
+
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <div class="risk-management-container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="risk-panel">
+                        <div class="risk-panel-header">
+                            <i class="icon-shield"></i>
+                            <h3>风控管理配置</h3>
+                        </div>
+                        
+                        <div class="risk-form-body">
+                            <form role="form" action="" method="post" id="formid">
+                                
+                                <!-- 指定客户亏损 -->
+                                <div class="risk-form-group">
+                                    <div class="risk-label-wrapper">
+                                        <div class="risk-label-icon loss">
+                                            <i class="icon-minus-sign"></i>
+                                        </div>
+                                        <label class="risk-label">指定客户亏损</label>
+                                    </div>
+                                    <div class="risk-input-wrapper">
+                                        <input type="text" 
+                                               class="risk-form-control" 
+                                               name="to_loss" 
+                                               placeholder="请填写客户ID" 
+                                               value="{$to_loss?$to_loss:''}">
+                                    </div>
+                                    <div class="risk-info-box">
+                                        <strong>说明：</strong>
+                                        <span>此处设置会员ID（如：8888），多个用户用|符号分开（如：8888|9999）设置之后该会员所有订单都会亏损，请谨慎操作。如停止该功能请在上面留空或者填0，并提交。</span>
+                                    </div>
+                                </div>
+
+                                <!-- 指定客户赢利 -->
+                                <div class="risk-form-group">
+                                    <div class="risk-label-wrapper">
+                                        <div class="risk-label-icon win">
+                                            <i class="icon-plus-sign"></i>
+                                        </div>
+                                        <label class="risk-label">指定客户赢利</label>
+                                    </div>
+                                    <div class="risk-input-wrapper">
+                                        <input type="text" 
+                                               class="risk-form-control" 
+                                               name="to_win" 
+                                               placeholder="请填写客户ID" 
+                                               value="{$to_win?$to_win:''}">
+                                    </div>
+                                    <div class="risk-info-box">
+                                        <strong>说明：</strong>
+                                        <span>此处设置会员ID（如：8888），多个用户用|符号分开（如：8888|9999）设置之后该会员所有订单都会赢利，请谨慎操作。如停止该功能请在上面留空或者填0，并提交。</span>
+                                    </div>
+                                </div>
+
+                                <!-- 最小风控值 -->
+                                <div class="risk-form-group">
+                                    <div class="risk-label-wrapper">
+                                        <div class="risk-label-icon min">
+                                            <i class="icon-money"></i>
+                                        </div>
+                                        <label class="risk-label">最小风控值</label>
+                                    </div>
+                                    <div class="risk-input-wrapper">
+                                        <input type="text" 
+                                               class="risk-form-control" 
+                                               name="min_price" 
+                                               placeholder="请填写最小风控值" 
+                                               value="{$min_price?$min_price:''}">
+                                    </div>
+                                    <div class="risk-info-box warning">
+                                        <strong>说明：</strong>
+                                        <span>下单达到此金额，则会受到下面风控影响。</span>
+                                    </div>
+                                </div>
+
+                                <!-- 风控概率 -->
+                                <div class="risk-form-group">
+                                    <div class="risk-label-wrapper">
+                                        <div class="risk-label-icon chance">
+                                            <i class="icon-bar-chart"></i>
+                                        </div>
+                                        <label class="risk-label">风控概率</label>
+                                    </div>
+                                    <div class="risk-input-wrapper">
+                                        <textarea name="chance" 
+                                                  class="risk-form-control risk-textarea" 
+                                                  placeholder="请输入风控概率配置">{$chance?$chance:''}</textarea>
+                                    </div>
+                                    <div class="risk-info-box info">
+                                        <strong>说明：</strong>
+                                        <span>输入金额区间，在金额区间之内会根据此概率盈亏。不在此区间则不受风控影响</span>
+                                        <br>
+                                        <strong>格式：</strong>
+                                        <span>区间开始-区间结束:客户赢利概率|　符号必须为英文符号，如0-100:50|100-200:30</span>
+                                    </div>
+                                </div>
+                                
+                                <input type="hidden" name="id" value="{$id?$id:''}">
+                                
+                                <!-- 提交按钮 -->
+                                <div class="risk-submit-wrapper">
+                                    <button type="submit" 
+                                            class="risk-submit-btn" 
+                                            onclick="return editrisk(this.form)">
+                                        <i class="icon-save"></i> 保存配置
+                                    </button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+      <!--main content end-->
+  </section>
+
+{include file="foot" /}
+<script>
+
+function editrisk(form) {
+  
+  var formurl = "{:Url('goods/addrisk')}"
+    var data = $('#formid').serialize();
+    var locurl = "{:Url('goods/risk')}";
+    WPpost(formurl,data,locurl);
+    return false;
+}
+
+
+</script>

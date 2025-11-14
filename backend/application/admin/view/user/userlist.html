@@ -1,0 +1,560 @@
+{include file="head" /}
+
+{include file="menu" /}
+
+<style>
+/* 现代化客户列表样式 */
+.modern-user-list {
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.page-header-modern {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+}
+
+.page-header-modern h2 {
+    color: #fff;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.page-header-modern p {
+    color: rgba(255,255,255,0.9);
+    margin: 5px 0 0 0;
+    font-size: 14px;
+}
+
+.search-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.search-row {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.search-item {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-item label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4a5568;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.modern-input, .modern-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #d6e4ff;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s;
+    outline: none;
+    background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.05);
+}
+
+.modern-input:focus, .modern-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.btn-modern {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-primary-modern {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+.btn-primary-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.quick-filters {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+    border: 2px solid #d6e4ff;
+    border-radius: 10px;
+    color: #4a5568;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+.action-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-add {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: #fff;
+}
+
+.btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+}
+
+.table-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.table-modern {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-modern thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.table-modern thead th {
+    padding: 16px 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    text-align: left;
+    border: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-modern tbody tr {
+    border-bottom: 1px solid #e8ecf4;
+    transition: all 0.3s;
+    background: linear-gradient(90deg, #ffffff 0%, #f8f9ff 100%);
+}
+
+.table-modern tbody tr:nth-child(even) {
+    background: linear-gradient(90deg, #fafbff 0%, #f0f4ff 100%);
+}
+
+.table-modern tbody tr:hover {
+    background: linear-gradient(90deg, #e8eeff 0%, #d6e4ff 100%);
+    transform: scale(1.01);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.table-modern tbody td {
+    padding: 16px 12px;
+    font-size: 13px;
+    color: #2d3748;
+    vertical-align: middle;
+}
+
+.user-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-customer {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.badge-agent {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.money-text {
+    color: #f5576c;
+    font-weight: 600;
+}
+
+.btn-action {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 2px;
+}
+
+.btn-success-action {
+    background: #48bb78;
+    color: #fff;
+}
+
+.btn-danger-action {
+    background: #f56565;
+    color: #fff;
+}
+
+.btn-info-action {
+    background: #4299e1;
+    color: #fff;
+}
+
+.btn-warning-action {
+    background: #ed8936;
+    color: #fff;
+}
+
+.btn-action:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.pagination-modern {
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .search-row {
+        flex-direction: column;
+    }
+    
+    .search-item {
+        width: 100%;
+    }
+    
+    .quick-filters {
+        flex-direction: column;
+    }
+    
+    .filter-btn {
+        width: 100%;
+    }
+}
+</style>
+
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper modern-user-list">
+        
+        <!-- 页面标题 -->
+        <div class="page-header-modern">
+            <h2>客户管理</h2>
+            <p>管理所有客户和代理商信息</p>
+        </div>
+
+        <!-- 搜索区域 -->
+        <div class="search-card">
+            <form action="{:url('user/userlist')}" method="get">
+                <div class="search-row">
+                    <div class="search-item">
+                        <label>用户类型</label>
+                        <select name="otype" class="modern-select">
+                            <option value="">全部类型</option>
+                            <option {if isset($getdata['otype']) && $getdata['otype'] === 0} selected="selected" {/if} value="0">客户</option>
+                            <option {if isset($getdata['otype']) && $getdata['otype'] == 101} selected="selected" {/if} value="101">代理商</option>
+                        </select>
+                    </div>
+                    <div class="search-item" style="flex: 2;">
+                        <label>搜索用户</label>
+                        <input type="text" value="{$getdata['username']?$getdata['username']:''}" class="modern-input" name="username" placeholder="输入昵称/姓名/手机号/编号搜索..."/>
+                    </div>
+                    <div class="search-item" style="flex: 0;">
+                        <button type="submit" class="btn-modern btn-primary-modern">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            搜索
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 快捷筛选 -->
+        <div class="quick-filters">
+            <a href="{:url('user/userlist')}"><button class="filter-btn">📊 所有用户</button></a>
+            <a href="{:url('user/userlist',array('otype'=>0))}"><button class="filter-btn">👤 所有客户</button></a>
+            <a href="{:url('user/userlist',array('otype'=>101))}"><button class="filter-btn">💼 所有代理商</button></a>
+            <a href="{:url('user/userlist',array('today'=>1,'otype'=>0))}"><button class="filter-btn">⭐ 今日客户</button></a>
+            <a href="{:url('user/userlist',array('today'=>1,'otype'=>101))}"><button class="filter-btn">⚡ 今日代理</button></a>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="action-btns" style="margin-bottom: 20px;">
+            <a href="{:url('user/useradd')}"><button class="btn-modern btn-add">➕ 添加客户</button></a>
+            <a href="{:url('user/vipuseradd')}"><button class="btn-modern btn-add">➕ 添加代理</button></a>
+        </div>
+
+        <!-- 数据表格 -->
+        <div class="table-card">
+            <table class="table-modern">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户信息</th>
+                        <th>客户名称</th>
+                        <th>创建时间</th>
+                        <th>最近登录</th>
+                        <th>订单数</th>
+                        <th>账户余额</th>
+                        <th>身份</th>
+                        <th>红利</th>
+                        <th>佣金</th>
+                        <th>归属代理</th>
+                        <th>余额宝</th>
+                        <th style="width: 280px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- {volist name="userinfo" id="vo"} -->
+                    <tr>
+                        <td><strong>#{$vo.uid}</strong></td>
+                        <td>{$vo.username}</td>
+                        <td>{$vo.nickname}</td>
+                        <td>{$vo.utime|date="Y-m-d H:i:s",###}</td>
+                        <td>{$vo.logintime|date="Y-m-d H:i:s",###}</td>
+                        <td><span class="user-badge badge-customer">{:ordernum($vo['uid'])}</span></td>
+                        <td><span class="money-text">¥{$vo.usermoney?$vo.usermoney:'0'}</span></td>
+                        <td>
+                            {if $vo.otype == 0}
+                            <span class="user-badge badge-customer">客户</span>
+                            {elseif $vo.otype == 101}
+                            <span class="user-badge badge-agent">代理商</span>
+                            {/if}
+                        </td>
+                        <td>{$vo.rebate?$vo.rebate:'0'}%</td>
+                        <td>{$vo.feerebate?$vo.feerebate:'0'}%</td>
+                        <td><a href="{:url('userlist',array('oid'=>$vo['oid']))}" style="color: #667eea;">{:getuser($vo['oid'],"username")}</a></td>
+                        <td><span class="money-text">¥{$vo.jjbyue?$vo.jjbyue:'0'}</span></td>
+                        <td>
+                            <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                {if $vo.ustatus == 0}
+                                <button class="btn-action btn-danger-action" onclick="doustatus(1,{$vo.uid})">禁用</button>
+                                {elseif $vo.ustatus == 1}
+                                <button class="btn-action btn-success-action" onclick="doustatus(0,{$vo.uid})">启用</button>
+                                {/if}
+                                
+                                {if $vo.ustatus == 4}
+                                <button class="btn-action btn-success-action" onclick="jystatus(0,{$vo.uid})">恢复交易</button>
+                                {else/}
+                                <button class="btn-action btn-warning-action" onclick="jystatus(4,{$vo.uid})">禁止交易</button>
+                                {/if}
+
+                                {if $vo.otype == 101}
+                                <a href="{:url('userlist',array('oid'=>$vo['uid']))}"><button class="btn-action btn-info-action">下级客户</button></a>
+                                <a href="{:url('vipuserlist',array('oid'=>$vo['uid']))}"><button class="btn-action btn-info-action">下级代理</button></a>
+                                <a href="{:url('yeji',array('uid'=>$vo['uid']))}"><button class="btn-action btn-info-action">业绩</button></a>
+                                {if $_SESSION['otype'] == 3}
+                                <a href="{:url('user/vipuseredit',array('uid'=>$vo['uid']))}"><button class="btn-action btn-warning-action">修改</button></a>
+                                <button class="btn-action btn-danger-action" onclick="deleteuser({$vo.uid})">删除</button>
+                                {/if}
+                                {/if}
+                                
+                                {if $vo.otype == 0}
+                                <button class="btn-action btn-success-action" onclick="dootype(101,{$vo.uid})">成为代理</button>
+                                {if $_SESSION['otype'] == 3}
+                                <a href="{:url('user/useredit',array('uid'=>$vo['uid']))}"><button class="btn-action btn-warning-action">修改</button></a>
+                                <button class="btn-action btn-danger-action" onclick="deleteuser({$vo.uid})">删除</button>
+                                {/if}
+                                {/if}
+
+                                <a href="{:url('user/userbank',array('uid'=>$vo['uid']))}"><button class="btn-action btn-info-action">银行</button></a>
+                                <a href="{:url('price/pricelist')}?username={$vo.username}"><button class="btn-action btn-info-action">报表</button></a>
+                            </div>
+                        </td>
+                    </tr>
+                <!-- {/volist} -->
+                </tbody>
+            </table>
+            
+            <div class="pagination-modern">
+                {$userinfo->render()}
+            </div>
+        </div>
+
+    </section>
+</section>
+<!--main content end-->
+
+{include file="foot" /}
+<script>
+
+function doustatus(type,uid) {
+  
+  if(type == 1){
+    var con = '确定禁用吗？';
+  }else if(type == 0){
+    var con = '确定启用吗？';
+  }else{
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  if(!uid){
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  layer.open({
+    content: con,
+    yes: function(index){
+      //do something
+      var formurl = "{:Url('user/doustatus')}";
+      var data = 'uid='+uid+'&ustatus='+type;
+
+      $.post(formurl,data,function(resdata){
+        layer.msg(resdata.data);
+        if(resdata.type == 1){
+          history.go(0);
+        }
+      })
+
+      
+    }
+  });
+}
+
+function jystatus(type,uid) {
+  
+  if(type == 4){
+    var con = '确定禁用吗？';
+  }else if(type == 0){
+    var con = '确定启用吗？';
+  }else{
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  if(!uid){
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  layer.open({
+    content: con,
+    yes: function(index){
+      //do something
+      var formurl = "{:Url('user/jystatus')}";
+      var data = 'uid='+uid+'&ustatus='+type;
+
+      $.post(formurl,data,function(resdata){
+        layer.msg(resdata.data);
+        if(resdata.type == 1){
+          history.go(0);
+        }
+      })
+
+      
+    }
+  });
+}
+
+function dootype(type,uid) {
+  
+  if(type == 101){
+    var con = '确定要成为代理商吗？';
+  }else{
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  if(!uid){
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  layer.open({
+    content: con,
+    yes: function(index){
+      //do something
+      var formurl = "{:Url('user/dootype')}";
+      var data = 'uid='+uid+'&otype='+type;
+
+      $.post(formurl,data,function(resdata){
+        layer.msg(resdata.data);
+        if(resdata.type == 1){
+          history.go(0);
+        }
+      })
+
+      
+    }
+  });
+}
+
+
+
+
+function deleteuser (uid) {
+  
+  layer.open({
+    content: '你确定删除吗？不可恢复哦，请慎重操作！',
+    yes: function(index){
+      //do something
+      var formurl = "{:Url('user/deleteuser')}";
+      var data = 'uid='+uid;
+
+      $.post(formurl,data,function(resdata){
+        layer.msg(resdata.data);
+        if(resdata.type == 1){
+          history.go(0);
+        }
+      })
+
+      
+    }
+  });
+
+
+}
+
+
+</script>

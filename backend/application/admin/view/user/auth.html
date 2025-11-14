@@ -1,0 +1,275 @@
+{include file="head" /}
+
+{include file="menu" /}
+
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!--state overview start-->
+              
+              <div class="row state-overview">
+                <div class="container">
+				        <form action="{:url('user/auth')}" method="get">
+                <div class="row">
+                      <div class="col-lg-5 mar-10">
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">账号</span>
+                            <input type="text"  value="{$getdata['username']?$getdata['username']:''}"  class="form-control" name="username" placeholder="用户账号"/>
+                        </div>
+                      </div>
+
+                      
+                  <div class="mar-10">
+                   <input type="submit" class="btn btn-success" value="搜索">
+                  </div>
+                </div>
+                </form>
+              </div>
+              </div>
+              <!--state overview end-->
+             <div class="row">
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              用户列表
+                          </header>
+                          <table class="table table-advance table-hover">
+                            <thead class="ordertable">
+                              <tr>
+                                <th>用户ID</th>
+                                <th>客户信息</th>
+                                <!--<th>客户名称</th>-->
+								<th>真实姓名</th>
+								<th>身份证号</th>
+								<th>正面</th>
+								<th>反面</th>
+								<th>状态</th>
+								<th>提交时间</th>
+                                {if $otype == 3}
+                                    <th>操作</th>
+                                {/if}
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {volist name="userinfo" id="vo"}
+                              <tr>
+                                  <td>{$vo.uid}</td>
+                                  <td>{$vo.username}</td>
+                                  <td>{$vo.name}</td>
+                                  <td>{$vo.code}</td>
+                                <td>
+                                    <img src="{$vo.img1}" style="width: 250px;">
+                                </td>
+                                <td>
+                                    <img src="{$vo.img2}" style="width: 250px;">
+                                </td>
+                                <td>{$vo.times|date="Y-m-d H:i:s",###} </td>
+                                <td>
+                                    {if $vo.status == 0}
+                                        <span class="color_green">待审核</span>
+                                    {elseif $vo.status == 1/}
+                                        <span class="color_green">审核通过</span>
+                                    {elseif $vo.status == 2/}
+                                        <span class="color_red">审核拒绝</span>
+                                    {/if}
+                                </td>
+                                
+                                <td>
+                                    {if $vo.status == 0}
+                                        <button class="btn btn-primary btn-xs price" data-toggle="modal" data-bpid="{$vo.id}" data-userid="{$vo.id}" data-target="#myModal">处理/拒绝</button>
+                                    {else/}
+                                        <span class="color_green">已审核</span>
+                                    {/if}
+                                </td>
+                                    
+                              </tr>
+							{/volist}
+                              
+                              
+                              
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
+              </div>
+              
+             {$userinfo->render()}
+
+          </section>
+      </section>
+      <!--main content end-->
+      
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top:200px">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #B50000;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">用户实名审核</h4>
+      </div>
+      <div class="modal-body">
+        <div class="priceinfo color_red"></div><br>
+        <div class="input-group">
+           拒绝时备注：<textarea name="content" class="form-control cash_content" cols="60" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary " onclick="dopay(1)">通过</button>
+        <button type="button" class="btn btn-danger " onclick="dopay(2)">拒绝</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{include file="foot" /}
+<script>
+
+var bpid = '';
+$(".price").click(function(){
+  //userid = $(this).attr('data-userid');
+  bpid = $(this).attr('data-bpid');
+  $('.priceinfo').html('若同意，点击“同意”，若不同意点击“拒绝”');
+  $('.cash_content').val('');
+});
+    
+function dopay(type){
+	content = $('.cash_content').val();
+    console.log(content);
+	var formurl = "{:Url('user/authEdit')}";
+	var data = 'id='+bpid+"&cash_content="+content+'&status='+type;
+    var locurl = "{:Url('user/auth')}";
+
+    WPpost(formurl,data,locurl);
+};
+
+
+function doustatus(type,uid) {
+  
+  if(type == 2){
+    var con = '确定拒绝审核吗？';
+  }else if(type == 3){
+    var con = '确定通过审核吗？';
+  }
+
+  if(!uid){
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  layer.open({
+    content: con,
+    yes: function(index){
+      //do something
+      var formurl = "{:Url('user/authStatus')}";
+      var data = 'uid='+uid+'&card_status='+type;
+
+      $.post(formurl,data,function(resdata){
+        layer.msg(resdata.data);
+        if(resdata.type == 1){
+          history.go(0);
+        }
+      })
+
+      
+    }
+  });
+}
+
+function jystatus(type,uid) {
+  
+  if(type == 4){
+    var con = '确定禁用吗？';
+  }else if(type == 0){
+    var con = '确定启用吗？';
+  }else{
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  if(!uid){
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  layer.open({
+    content: con,
+    yes: function(index){
+      //do something
+      var formurl = "{:Url('user/jystatus')}";
+      var data = 'uid='+uid+'&ustatus='+type;
+
+      $.post(formurl,data,function(resdata){
+        layer.msg(resdata.data);
+        if(resdata.type == 1){
+          history.go(0);
+        }
+      })
+
+      
+    }
+  });
+}
+
+function dootype(type,uid) {
+  
+  if(type == 101){
+    var con = '确定要成为代理商吗？';
+  }else{
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  if(!uid){
+    layer.msg('参数错误！');
+    return false;
+  }
+
+  layer.open({
+    content: con,
+    yes: function(index){
+      //do something
+      var formurl = "{:Url('user/dootype')}";
+      var data = 'uid='+uid+'&otype='+type;
+
+      $.post(formurl,data,function(resdata){
+        layer.msg(resdata.data);
+        if(resdata.type == 1){
+          history.go(0);
+        }
+      })
+
+      
+    }
+  });
+}
+
+
+
+
+function deleteuser (uid) {
+  
+  layer.open({
+    content: '你确定删除吗？不可恢复哦，请慎重操作！',
+    yes: function(index){
+      //do something
+      var formurl = "{:Url('user/deleteuser')}";
+      var data = 'uid='+uid;
+
+      $.post(formurl,data,function(resdata){
+        layer.msg(resdata.data);
+        if(resdata.type == 1){
+          history.go(0);
+        }
+      })
+
+      
+    }
+  });
+
+
+}
+
+
+</script>

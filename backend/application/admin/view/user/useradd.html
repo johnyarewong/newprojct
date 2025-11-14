@@ -1,0 +1,626 @@
+{include file="head" /}
+
+<!-- 编辑器引入开始 -->
+<link href="/static/public/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/static/public/umeditor/third-party/jquery.min.js"></script>
+<script type="text/javascript" src="/static/public/umeditor/third-party/template.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/public/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/public/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="/static/public/umeditor/lang/zh-cn/zh-cn.js"></script>
+
+<!-- 编辑器引入结束 -->
+
+<style>
+/* 🎨 年轻化用户编辑页面样式 - 紧凑一页版 */
+.user-edit-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 15px 10px;
+}
+
+.modern-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-header-modern {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 18px 25px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header-modern::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(50px, 50px) rotate(360deg); }
+}
+
+.card-header-modern h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.card-header-modern h1 i {
+    margin-right: 10px;
+    font-size: 24px;
+    background: linear-gradient(135deg, #ffd89b, #19547b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.card-body-modern {
+    padding: 20px 25px;
+}
+
+/* 双列布局 */
+.form-row-modern {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 0;
+}
+
+.form-group-modern {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-group-modern.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group-modern label {
+    display: block;
+    margin-bottom: 6px;
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+}
+
+.form-group-modern label i {
+    margin-right: 6px;
+    color: #667eea;
+    font-size: 14px;
+}
+
+.form-control-modern {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f7fafc;
+    color: #2d3748;
+}
+
+.form-control-modern:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
+    transform: translateY(-1px);
+}
+
+.form-control-modern:disabled {
+    background: linear-gradient(135deg, #e0e7ff 0%, #f3e7ff 100%);
+    color: #667eea;
+    font-weight: 600;
+    cursor: not-allowed;
+    border-color: #c7d2fe;
+}
+
+.select-modern {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f7fafc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E") no-repeat right 14px center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    color: #2d3748;
+}
+
+.select-modern:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background-color: white;
+}
+
+.info-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+    color: white;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 3px;
+}
+
+.btn-group-modern {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #e2e8f0;
+}
+
+.btn-group-modern.full-width {
+    grid-column: 1 / -1;
+}
+
+.btn-modern {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-modern::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-modern:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary-modern {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
+}
+
+.btn-secondary-modern {
+    background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
+    color: #2d3748;
+}
+
+.btn-secondary-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(160, 174, 192, 0.4);
+}
+
+.section-divider {
+    margin: 18px 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+    border: none;
+    grid-column: 1 / -1;
+}
+
+.section-title {
+    color: #2d3748;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 15px 0 12px 0;
+    display: flex;
+    align-items: center;
+    grid-column: 1 / -1;
+}
+
+.section-title::before {
+    content: '';
+    width: 3px;
+    height: 18px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin-right: 10px;
+    border-radius: 2px;
+}
+
+.password-hint {
+    font-size: 11px;
+    color: #718096;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.password-hint i {
+    margin-right: 4px;
+    color: #667eea;
+    font-size: 11px;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .form-row-modern {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-header-modern {
+        padding: 15px 20px;
+    }
+    
+    .card-body-modern {
+        padding: 15px 20px;
+    }
+    
+    .btn-group-modern {
+        flex-direction: column;
+    }
+    
+    .card-header-modern h1 {
+        font-size: 18px;
+    }
+}
+
+/* 输入框动画效果 */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.form-control-modern.error {
+    animation: shake 0.5s;
+    border-color: #f56565;
+}
+
+/* 加载动画 */
+.btn-modern.loading {
+    pointer-events: none;
+    position: relative;
+}
+
+.btn-modern.loading::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 50%;
+    left: 50%;
+    margin-left: -9px;
+    margin-top: -9px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+</style>
+
+{include file="menu" /}
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+        <div class="user-edit-container">
+            <div class="modern-card">
+                <div class="card-header-modern">
+                    <h1>
+                        <i class="icon-user"></i>
+                        {if isset($isedit) && $isedit == 1}编辑用户信息{else/}添加新用户{/if}
+                    </h1>
+                                  </div>
+
+                <div class="card-body-modern">
+                    <form role="form" method="post" id="formid">
+                        <div class="form-row-modern">
+                            <!-- 基本信息 - 双列布局 -->
+                            <div class="form-group-modern">
+                                <label><i class="icon-tag"></i> 用户名</label>
+                                <input type="text" class="form-control-modern" value="{$username?$username:'系统生成'}" disabled="true">
+                                      </div>
+
+                            <div class="form-group-modern">
+                                <label><i class="icon-phone"></i> 手机号</label>
+                                <input type="text" class="form-control-modern" value="{$utel?$utel:''}" name="utel" placeholder="请输入11位手机号">
+                                  </div>
+
+                            <div class="form-group-modern">
+                                <label><i class="icon-user"></i> 真实姓名</label>
+                                <input type="text" class="form-control-modern" value="{$nickname?$nickname:''}" name="nickname" placeholder="请输入真实姓名">
+                                      </div>
+
+								{if isset($isedit) && $isedit == 1}
+                            <div class="form-group-modern">
+                                <label><i class="icon-flag"></i> 账户状态</label>
+                                <select name="ustatus" class="select-modern">
+                                    <option {if isset($ustatus) && $ustatus == 0} selected="selected" {/if} value="0">✅ 正常</option>
+                                    <option {if isset($ustatus) && $ustatus == 1} selected="selected" {/if} value="1">🔒 冻结</option>
+                                          </select>
+                                      </div>
+                            {else/}
+                            <div class="form-group-modern"></div>
+								 {/if}
+
+                            <!-- 关系设置 -->
+                            <hr class="section-divider">
+                            <div class="section-title">账户关系</div>
+
+                            <div class="form-group-modern full-width">
+                                <label><i class="icon-sitemap"></i> 上级用户</label>
+                                <select name="oid" class="select-modern">
+                                         	{volist name="userlist" id="vo"}
+                                    <option {if $userinfo.oid == $vo.uid} selected="selected" {/if} value="{$vo.uid}">
+                                        {$vo.utel} - {$vo.nickname}
+                                         	 </option>
+																					{/volist}
+                                          </select>
+                                      </div>
+
+									{if isset($isedit) && $isedit == 1}
+                            <!-- 资金管理 -->
+                            <hr class="section-divider">
+                            <div class="section-title">资金管理</div>
+
+                            <div class="form-group-modern">
+                                <label><i class="icon-money"></i> 账户余额</label>
+                                <input type="text" class="form-control-modern" value="{$usermoney?$usermoney:'0'}" name="usermoney" placeholder="0.00">
+                                <input type="hidden" value="{$usermoney?$usermoney:'0'}" name="ordusermoney">
+                                  </div>
+                                  
+                            <div class="form-group-modern">
+                                <label><i class="icon-briefcase"></i> 余额宝余额</label>
+                                <input type="text" class="form-control-modern" value="{$jjbyue?$jjbyue:'0'}" name="jjbyue" placeholder="0.00">
+                                  </div>
+									
+                            <div class="form-group-modern full-width">
+                                <label><i class="icon-lock"></i> 资金密码</label>
+                                <input type="password" class="form-control-modern" value="" name="zfmm" placeholder="用于提现、转账等资金操作">
+                                  </div>
+
+                            <!-- 密码设置 -->
+                            <hr class="section-divider">
+                            <div class="section-title">密码设置</div>
+
+                            <div class="form-group-modern">
+                                <label><i class="icon-key"></i> 旧密码</label>
+                                <input type="password" class="form-control-modern" value="" name="ordpwd" placeholder="如需修改密码请输入旧密码">
+                                  </div>
+
+                            <div class="form-group-modern"></div>
+
+                            <div class="form-group-modern">
+                                <label><i class="icon-shield"></i> 新密码</label>
+                                <input type="password" class="form-control-modern" value="" name="upwd" placeholder="至少6位">
+                                  </div>
+
+                            <div class="form-group-modern">
+                                <label><i class="icon-check-sign"></i> 确认密码</label>
+                                <input type="password" class="form-control-modern" value="" name="upwd2" placeholder="再次输入新密码">
+                                  </div>
+
+                            <input type="hidden" value="{$uid}" name="uid">
+                            
+                            {else/}
+                            
+                            <!-- 密码设置（新增用户） -->
+                            <hr class="section-divider">
+                            <div class="section-title">密码设置</div>
+
+                            <div class="form-group-modern">
+                                <label><i class="icon-shield"></i> 登录密码</label>
+                                <input type="password" class="form-control-modern" value="" name="upwd" placeholder="至少6位">
+                            </div>
+
+                            <div class="form-group-modern">
+                                <label><i class="icon-check-sign"></i> 确认密码</label>
+                                <input type="password" class="form-control-modern" value="" name="upwd2" placeholder="再次输入密码">
+                                      </div>
+
+                            <input type="hidden" value="" name="ordpwd">
+                            
+								{/if}
+									
+                            <!-- 操作按钮 -->
+                            <div class="btn-group-modern full-width">
+                                <button type="button" class="btn-modern btn-secondary-modern" onclick="history.back()">
+                                    <i class="icon-reply"></i> 返回
+                                </button>
+                                <button type="submit" class="btn-modern btn-primary-modern" onclick="return editcon(this.form)">
+                                    <i class="icon-save"></i> 保存
+                                </button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                  </div>
+          </div>       
+          </section>
+      </section>
+      <!--main content end-->
+
+
+{include file="foot" /}
+<script type="text/javascript" src="/static/public/umeditor/umindex.js"></script>
+<script>
+    // 🎯 表单验证和提交 - 增强版
+	function editcon(form){
+		var type = "{$isedit}";
+        var utel = form.utel.value.trim();
+        var nickname = form.nickname.value.trim();
+		var upwd = form.upwd.value;
+		var upwd2 = form.upwd2.value;
+		var ordpwd = form.ordpwd.value;
+
+        // 清除所有错误样式
+        $('.form-control-modern').removeClass('error');
+
+        // 手机号验证（新增用户时）
+        if(type == 0){
+            if(!utel){
+                showError(form.utel, '请输入手机号');
+                return false;
+            }
+            if(!/^1[3-9]\d{9}$/.test(utel)){
+                showError(form.utel, '请输入正确的手机号格式');
+                return false;
+            }
+        }
+
+        // 真实姓名验证
+        if(!nickname){
+            showError(form.nickname, '请输入真实姓名');
+            return false;
+        }
+
+        // 密码验证
+        if(type == 0 || (type == 1 && ordpwd)){ 
+            if(!upwd){
+                showError(form.upwd, '请输入密码');
+                return false;
+            }
+            if(upwd.length < 6){
+                showError(form.upwd, '密码长度至少6位');
+                return false;
+            }
+            if(!upwd2){
+                showError(form.upwd2, '请再次输入密码');
+                return false;
+            }
+            if(upwd !== upwd2){
+                showError(form.upwd2, '两次输入密码不一致');
+                return false;
+            }
+        }
+
+        // 设置表单URL
+        var formurl = type == 0 ? "{:Url('user/useradd')}" : "{:Url('user/useredit')}";
+	    var data = $('#formid').serialize();
+	    var locurl = "{:Url('user/userlist')}";
+
+        // 添加加载状态
+        var submitBtn = $(form).find('.btn-primary-modern');
+        submitBtn.addClass('loading').prop('disabled', true);
+        submitBtn.html('<i class="icon-spinner icon-spin"></i> 提交中...');
+
+        // 提交表单
+        WPpost(formurl, data, locurl);
+
+	    return false;
+	}
+
+    // 显示错误提示
+    function showError(element, message){
+        $(element).addClass('error');
+        layer.msg('❌ ' + message, {icon: 5, time: 2000});
+        $(element).focus();
+    }
+
+    // 🎨 输入框焦点效果
+    $(document).ready(function(){
+        // 输入框获得焦点时的动画
+        $('.form-control-modern, .select-modern').on('focus', function(){
+            $(this).parent().addClass('focused');
+        }).on('blur', function(){
+            $(this).parent().removeClass('focused');
+            $(this).removeClass('error');
+        });
+
+        // 实时验证手机号
+        $('input[name="utel"]').on('input', function(){
+            var utel = $(this).val();
+            if(utel && !/^1[3-9]\d{9}$/.test(utel)){
+                $(this).css('border-color', '#ff6b6b');
+            } else if(utel) {
+                $(this).css('border-color', '#2ed573');
+            } else {
+                $(this).css('border-color', '#e2e8f0');
+            }
+        });
+
+        // 实时验证密码匹配
+        $('input[name="upwd2"]').on('input', function(){
+            var upwd = $('input[name="upwd"]').val();
+            var upwd2 = $(this).val();
+            if(upwd2 && upwd !== upwd2){
+                $(this).css('border-color', '#ff6b6b');
+            } else if(upwd2 && upwd === upwd2) {
+                $(this).css('border-color', '#2ed573');
+            } else {
+                $(this).css('border-color', '#e2e8f0');
+            }
+        });
+
+        // 添加页面进入动画
+        setTimeout(function(){
+            $('.modern-card').css({
+                'opacity': '0',
+                'transform': 'translateY(30px)'
+            }).animate({
+                'opacity': '1',
+            }, 500, function(){
+                $(this).css('transform', 'translateY(0)');
+            });
+        }, 100);
+    });
+</script>
+
+<style>
+/* 额外的交互样式 */
+.form-group-modern.focused label {
+    color: #667eea;
+    transform: translateX(5px);
+    transition: all 0.3s ease;
+}
+
+.icon-spinner {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>

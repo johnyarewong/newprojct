@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20">
+  <!-- 红白条纹 -->
+  <rect width="30" height="20" fill="#cc0000"/>
+  <rect y="1.43" width="30" height="1.43" fill="#ffffff"/>
+  <rect y="4.29" width="30" height="1.43" fill="#ffffff"/>
+  <rect y="7.14" width="30" height="1.43" fill="#ffffff"/>
+  <rect y="10" width="30" height="1.43" fill="#ffffff"/>
+  <rect y="12.86" width="30" height="1.43" fill="#ffffff"/>
+  <rect y="15.71" width="30" height="1.43" fill="#ffffff"/>
+  <rect y="18.57" width="30" height="1.43" fill="#ffffff"/>
+  <!-- 蓝色方框 -->
+  <rect width="13" height="10" fill="#010066"/>
+  <!-- 黄色月牙和星星 -->
+  <g fill="#ffcc00">
+    <path d="M9,5 A2.5,2.5 0 0,1 9,8 A2,2 0 0,0 9,5"/>
+    <polygon points="10.5,4.5 11,5.5 12,5.2 11.3,6 12,6.8 11,6.5 10.5,7.5 10,6.5 9,6.8 9.7,6 9,5.2 10,5.5"/>
+  </g>
+</svg>

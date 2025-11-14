@@ -1,0 +1,66 @@
+  <div class="foot-row row" >
+            <div class="col-sm-12" style="padding-left: 0px;padding-right: 0px;">
+                <section class="panel" style="margin-bottom:0;">
+                    <div class="panel-body" style="padding: 0px;">
+                            		<li  class="col-md-12" style="margin-bottom: 0px;">
+                                          	<div class="xiugai-left" >
+                                                    <div class="avatar ">
+                                                      <a href="{:Url('/index/index/index/token/'.$token)}"  class=" {if $actionname == 'index' } tab-item-active{/if}">
+                                                      <div class="fa  fa-align-center"><i class="fa" ></i></div>
+                                                      </a>
+                                                    </div>
+                                                    <div class="activity-desk">
+                                                        <h6><a href="{:Url('/index/index/index/token/'.$token)}" class=" {if $actionname == 'index' } tab-item-active{/if}">商品行情</a> <span></span></h6>
+                                                   </div>
+                                          	</div>
+                                          	<div class="xiugai-left"  >
+                                              <div class="avatar">
+                                                 <a href="{:url('/index/order/hold/token/'.$token)}"  class=" {if $actionname == 'order' } tab-item-active{/if}">
+                                                <div class="fa fa-file-text"><i class="fa"></i></div>
+                                                 </a>
+                                              </div>
+                                              <div class="activity-desk">
+                                                  <h6><a href="{:url('/index/order/hold/token/'.$token)}" class=" {if $actionname == 'order' } tab-item-active{/if}">交易记录</a> <span></span></h6>
+                                              </div>
+                                          	</div>
+                                      		<div class="xiugai-left"  >
+                                              <div class="avatar">
+                                                 <a href="{:url('news/index')}"  class=" {if $actionname == 'news' } tab-item-active{/if}">
+                                                <div class="fa  fa-comment"><i class="fa"></i></div>
+                                                 </a>
+                                              </div>
+                                              <div class="activity-desk">
+                                                  <h6><a href="{:url('news/index')}"  class=" {if $actionname == 'news' } tab-item-active{/if}">最新资讯</a> <span></span></h6>
+                                              </div>
+                                          	</div>
+                                          	<!--	<div class="xiugai-left"  >
+                                              <div class="avatar">
+                                                 <a href="http://k.7pnn7c.cn/index/index/home?visiter_id=&visiter_name=&avatar=&business_id=3&groupid=0&special=3">
+                                                <div class="fa  fa-comment"><i class="fa"></i></div>
+                                                 </a>
+                                              </div>
+                                              <div class="activity-desk">
+                                                  <h6><a href="http://k.7pnn7c.cn/index/index/home?visiter_id=&visiter_name=&avatar=&business_id=3&groupid=0&special=3">在线客服</a> <span></span></h6>
+                                              </div>
+                                          	</div>-->
+                                          	<div class="xiugai-left"  >
+                                              <div class="avatar">
+                                                <a href="{:url('/index/user/index/token/'.$token)}"  class=" {if $actionname == 'user' } tab-item-active{/if}">
+                                                <div class="fa fa-home"><i class="fa " ></i></div>
+                                                 </a>
+                                              </div>
+                                              <div class="activity-desk">
+                                                  <h6><a href="{:url('/index/user/index/token/'.$token)}" class=" {if $actionname == 'user' } tab-item-active{/if}">个人中心</a> <span></span></h6>
+                                              </div>
+                                          	</div>
+                                          
+                                        </li>                     
+                  			  </div>
+              		  </section>
+            </div>
+    <style>
+      .tab-item-active {
+      color: rgb(236, 181, 64) !important;
+      }
+    
+    </style>

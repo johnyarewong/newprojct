@@ -1,0 +1,244 @@
+.xz-header .xz-header-btn{
+    width: 100%;
+	float: right;
+  	text-align: center;
+  	background: #65CEA7;
+    color: #fff;
+    border-right-color: #65CEA7;
+}
+
+
+.dropdown-menu{
+
+	    min-width: 100%;
+}
+
+.bth-color{
+	background: #65CEA7;
+    color: #fff;
+    border-right-color: #65CEA7;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.xz-right{
+	float: right;
+}
+.zx-zhxl{
+	padding-bottom: 12px;
+
+}
+.xz-foot-sj{
+	text-align: center;
+  	margin-top: 10px;
+}
+.foot-xiadan{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+ 	 z-index: 100;
+  border-top: 1px rgba(23, 22, 22, 0.07) solid;
+}
+
+.modal-title{
+	text-align: center;
+}
+
+ul.activity-list .activity-desk{
+	margin-left: 0px;
+}
+
+.text-muted-right{
+	    float: right;
+}
+.text-muted{
+color: #65CEA7;
+}
+.activity-list{
+    color: #65CEA7;
+}
+
+.xz-li{
+	    text-align: center;
+}
+.xz-li-a{
+	position: relative;
+  	padding-bottom: 10px;
+}
+
+.xz-li-i{
+	position: absolute;
+    left: 0%;
+    top: 23px;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+  	margin-top: 2px;
+  	padding: 0px;
+}
+.xz-li-span{
+    margin-top: 10px;
+  display: block;}
+
+.x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+  display: none !important; }
+
+.xz-button{
+    width: 100%;
+  margin-top: -50px;}
+
+.circle_wrapper {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 5px;
+    bottom: 120px;
+    margin: auto;
+    width: 110px;
+    height: 127px;
+    box-sizing: content-box;
+}
+
+.right_circle {
+    right: -50%;
+}
+.right_circle, .left_circle {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    overflow: hidden;
+    top: 8px;
+}
+
+.right_circle > img {
+    width: 100%;
+    position: absolute;
+    right: 50%;
+    -webkit-animation: run 5s linear;
+    animation-fill-mode: forwards;
+}
+.left_circle > img {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    -webkit-animation: runaway 5s linear;
+    animation-fill-mode: forwards;
+}
+
+
+/*倒计时圆形进度条*/
+.circle_wrapper {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 5px;
+    bottom: 120px;
+    margin: auto;
+    width: 110px;
+    height: 127px;
+    box-sizing: content-box;
+}
+
+.right_circle,.left_circle {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    overflow: hidden;
+    top: 8px;
+}
+.right_circle {
+    right: -50%;
+}
+.left_circle {
+    left: -50%;
+}
+.right_circle > img {
+    width: 100%;
+    position: absolute;
+    right: 50%;
+    -webkit-animation: run 5s linear;
+    animation-fill-mode: forwards;
+
+}
+@-webkit-keyframes run{
+    0{
+        transform: rotate(0);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+}
+.left_circle > img {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    -webkit-animation: runaway 5s linear;
+    animation-fill-mode: forwards;
+}
+@-webkit-keyframes runaway{
+    0{
+        transform: rotate(0);
+    }
+    50%{
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+
+.xz-remaining{
+	position: relative;
+    left: 0%;
+    top: -90px;
+  	text-align: center;
+}
+.xz-title-col{
+
+  text-align: center;
+  font-size: 2.5em;
+	color:#65CEA7;
+}
+.xz-xianjia{
+    margin-top: 17px;
+  text-align: center;}
+
+
+
+
+  .active{ color: #333;}
+.xz-text-muted{
+	margin-left: 10px;
+}
+
+.rise{
+  color:#fe0000;
+}
+.fall{
+  color:#00bd00;
+
+}
+.wrapper::after{
+	margin-bottom: 15px;
+}
+
+ul.activity-list li{
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+
+}
+.xz-progress {
+width: 100%;
+    height: 35px;
+    font-size: 20px;
+    text-align: center;
+    /* display: -webkit-box; */
+    position: absolute;
+   left: 0%;
+    top: 0px;
+    /* text-align: right; */
+
+}

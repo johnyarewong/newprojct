@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20">
+  <!-- 红色条纹 -->
+  <rect width="30" height="20" fill="#ed1c24"/>
+  <!-- 白色条纹 -->
+  <rect y="3.33" width="30" height="3.33" fill="#ffffff"/>
+  <rect y="13.33" width="30" height="3.33" fill="#ffffff"/>
+  <!-- 蓝色条纹 -->
+  <rect y="6.67" width="30" height="6.67" fill="#241d4f"/>
+</svg>

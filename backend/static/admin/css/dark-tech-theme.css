@@ -1,0 +1,246 @@
+/**
+ * Dark Tech Theme
+ * 说明: 管理后台深色科技风主题
+ */
+
+/* 全局背景与文字 */
+html{height:100%;}
+body{
+    background: linear-gradient(135deg,#0c0c0c 0%,#1a1a2e 50%,#16213e 100%) !important;
+    color:#e0e6ed !important;
+    font-family:'微软雅黑','Arial',sans-serif !important;
+    min-height:100%;
+}
+
+/* 顶部 Header（覆盖 white-bg） */
+.header.white-bg{
+    background: linear-gradient(135deg,#1e1e2e 0%,#2d3561 100%) !important;
+    border-bottom:2px solid rgba(0,162,255,.3) !important;
+    box-shadow:0 2px 20px rgba(0,0,0,.3) !important;
+}
+.header .logo{color:#00a2ff !important;font-weight:700;text-shadow:0 0 10px rgba(0,162,255,.5);}
+.header .logo span{color:#fff !important;}
+.top-nav .top-menu li a{color:#e0e6ed !important;transition:all .3s ease;}
+.top-nav .top-menu li a:hover{color:#00a2ff !important;text-shadow:0 0 8px rgba(0,162,255,.6);} 
+
+/* 顶部统计按钮（在线/充值/提现/订单） */
+.btn-stat{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:#e0e6ed !important;transition:all .25s ease;margin-left:8px}
+.btn-stat i{font-size:14px}
+.btn-stat:hover{background:rgba(0,162,255,.15);border-color:rgba(0,162,255,.45);box-shadow:0 8px 18px rgba(0,162,255,.15)}
+.btn-stat span{color:#e0e6ed !important}
+.btn-stat.stat-online i{color:#a5b4fc}
+.btn-stat.stat-recharge i{color:#63e6be}
+.btn-stat.stat-withdraw i{color:#ffd43b}
+.btn-stat.stat-orders i{color:#74c0fc}
+
+/* 左侧菜单 */
+#sidebar{background:linear-gradient(180deg,#1a1a2e 0%,#16213e 100%) !important;border-right:2px solid rgba(0,162,255,.2) !important;}
+.sidebar-menu li{border-bottom:1px solid rgba(255,255,255,.05) !important;}
+.sidebar-menu li a{color:#b8c5d1 !important; background:#1a2333 !important; padding:12px 16px !important;transition:all .3s ease;position:relative; line-height:20px;}
+.sidebar-menu li a:hover{background:rgba(0,162,255,.1) !important;color:#00a2ff !important;}
+.sidebar-menu li.active > a{background:rgba(0,162,255,.15) !important;color:#00a2ff !important;border-left:4px solid #00a2ff !important;}
+.sub-menu ul.sub{background:#1a2333 !important;}
+.sub-menu ul.sub li a{color:#b8c5d1 !important;}
+
+/* 统一全部页面的激活与悬停状态（更高优先级选择器） */
+#sidebar ul.sidebar-menu > li > a{background:#1a2333 !important;color:#b8c5d1 !important;border-left:0 !important;border-radius:8px}
+#sidebar ul.sidebar-menu > li.active > a{background:#1a2333 !important;color:#00a2ff !important;border-left:4px solid #00a2ff !important}
+#sidebar ul.sidebar-menu > li > a:hover{background:#1a2333 !important;color:#00a2ff !important}
+#sidebar ul.sidebar-menu > li > ul.sub > li > a{background:#1a2333 !important;color:#b8c5d1 !important;border:1px solid rgba(255,255,255,.04) !important;border-radius:6px;margin:6px 8px}
+#sidebar ul.sidebar-menu > li > ul.sub > li > a:hover{background:#1f2b3c !important;color:#00a2ff !important;border-color:rgba(0,162,255,.20) !important}
+#sidebar ul.sidebar-menu > li > ul.sub > li.active > a{background:#203047 !important;color:#00a2ff !important;border-color:rgba(0,162,255,.25) !important}
+#sidebar ul.sidebar-menu > li.sub-menu > a .arrow{display:none !important}
+
+/* 导航图标：科技蓝，并适当放大 */
+.sidebar-menu li a i{
+    color:#3aa0ff !important;           /* 默认蓝 */
+    font-size:18px !important;          /* 稍微大一点 */
+    margin-right:8px !important;
+    width:18px !important;              /* 占位以便文字对齐 */
+    text-align:center; display:inline-block; vertical-align:middle;
+}
+.sidebar-menu li a:hover i,
+.sidebar-menu li a:focus i{
+    color:#40a9ff !important;           /* 悬停更亮 */
+}
+.sidebar-menu li.active a i{
+    color:#00a2ff !important;           /* 激活高亮 */
+}
+.sub-menu ul.sub li a:hover{color:#00a2ff !important;background:rgba(0,162,255,.08) !important;}
+
+/* 主内容区与卡片 */
+#main-content{background:transparent !important;}
+.wrapper{background:transparent !important;}
+.panel{background:linear-gradient(135deg,rgba(26,26,46,.9),rgba(29,53,97,.9)) !important; border:1px solid rgba(0,162,255,.2) !important; border-radius:12px !important; box-shadow:0 8px 25px rgba(0,0,0,.3) !important;}
+.panel-heading{background:linear-gradient(135deg,rgba(0,162,255,.15),rgba(0,102,204,.15)) !important; color:#00a2ff !important; border-bottom:1px solid rgba(0,162,255,.3) !important;}
+
+/* 侧栏二级菜单：始终展开 + 规整布局 */
+#sidebar > ul > li > ul.sub{display:block !important; visibility:visible !important; height:auto !important; padding:6px 0 12px 0 !important;} /* 强制所有页面一致展开 */
+.sidebar-menu li.sub-menu > a .arrow{display:none !important;}
+.sidebar-menu li.sub-menu > a{cursor:default !important;}
+/* 二级导航：无分隔线，卡片式条块 */
+.sidebar-menu li.sub-menu ul.sub li a{
+    display:flex; align-items:center; justify-content:center; 
+    padding:12px 16px !important; font-size:12px; line-height:20px;
+    position:relative; border-left:none !important; border-radius:6px; margin:6px 8px;
+    background:#1a2333;                        /* 与一级一致 */
+    border:1px solid rgba(255,255,255,.04);     /* 细微描边，保持层次 */
+    text-align:center; box-sizing:border-box; min-height:40px;
+}
+.sidebar-menu li.sub-menu ul.sub li a::before{display:none;}
+.sidebar-menu li.sub-menu ul.sub li a:hover{
+    background:#1f2b3c !important;             /* 轻微提亮 */
+    border-color: rgba(0,162,255,.20);
+    color:#00a2ff !important;
+}
+.sidebar-menu li.sub-menu ul.sub li.active > a{
+    background:#203047 !important;             /* 略高亮，但仍接近一级 */
+    border-color: rgba(0,162,255,.25);
+    color:#00a2ff !important;
+}
+
+/* 表格 */
+.table{background:transparent !important;color:#e0e6ed !important;}
+.table thead th{background:linear-gradient(135deg,rgba(0,162,255,.2),rgba(0,102,204,.2)) !important;color:#00a2ff !important;border-bottom:2px solid rgba(0,162,255,.3) !important;}
+.table tbody tr{background:rgba(26,26,46,.7) !important;border-bottom:1px solid rgba(255,255,255,.05) !important;transition:all .2s ease;}
+.table tbody td{color:#e0e6ed !important;border-color:rgba(255,255,255,.05) !important;}
+.table tbody tr:hover{background:rgba(13,110,253,.8) !important;color:#fff !important;}
+.table tbody tr:hover td{color:#fff !important;text-shadow:none !important;font-weight:500 !important;}
+
+/* 避免老样式把单元格改为浅色 */
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th,
+.table > tbody > tr:hover > td,
+.table > tbody > tr:hover > th{background-color:transparent !important;}
+
+/* 颜色类 */
+.color_red{color:#ff4757 !important; font-weight:600;}
+.color_green{color:#2ed573 !important; font-weight:600;}
+
+ /* 用户头像与用户名区域美化 - 与统计按钮同排 */
+.user-dropdown .user-profile-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 5px 12px !important;
+    border-radius: 20px !important;
+    background: linear-gradient(135deg, rgba(0, 162, 255, 0.12), rgba(124, 77, 255, 0.12)) !important;
+    border: 1px solid rgba(124, 77, 255, 0.4) !important;
+    transition: all 0.3s ease !important;
+    margin-left: 8px !important;
+}
+
+.user-dropdown .user-profile-link:hover {
+    background: linear-gradient(135deg, rgba(0, 162, 255, 0.2), rgba(124, 77, 255, 0.2)) !important;
+    border-color: rgba(124, 77, 255, 0.6) !important;
+    box-shadow: 0 3px 12px rgba(124, 77, 255, 0.25) !important;
+}
+
+.user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c4dff, #00a2ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(124, 77, 255, 0.3), inset 0 1px 4px rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-avatar i {
+    color: #fff !important;
+    font-size: 14px !important;
+}
+
+.user-dropdown .username {
+    color: #e0e6ed !important;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+}
+
+.user-dropdown .caret {
+    border-top-color: #7c4dff !important;
+    border-bottom-color: #7c4dff !important;
+    margin-left: 2px;
+}
+
+/* 用户下拉菜单美化 */
+.user-dropdown .dropdown-menu.logout {
+    background: linear-gradient(135deg, #1e1e2e, #2d3561) !important;
+    border: 1px solid rgba(0, 162, 255, 0.3) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    margin-top: 8px !important;
+    padding: 8px 0 !important;
+}
+
+.user-dropdown .dropdown-menu.logout li a {
+    color: #e0e6ed !important;
+    padding: 10px 20px !important;
+    transition: all 0.3s ease;
+}
+
+.user-dropdown .dropdown-menu.logout li a:hover {
+    background: rgba(0, 162, 255, 0.15) !important;
+    color: #00a2ff !important;
+}
+
+.user-dropdown .dropdown-menu.logout li a i {
+    margin-right: 8px;
+    color: #7c4dff;
+}
+
+ /* 排序输入框美化 */
+.sort-input {
+    width: 60px !important;
+    height: 36px !important;
+    background: rgba(0, 162, 255, 0.08) !important;
+    border: 1px solid rgba(0, 162, 255, 0.3) !important;
+    border-radius: 8px !important;
+    color: #00a2ff !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    padding: 6px 8px !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sort-input:hover {
+    background: rgba(0, 162, 255, 0.12) !important;
+    border-color: rgba(0, 162, 255, 0.5) !important;
+    box-shadow: 0 4px 12px rgba(0, 162, 255, 0.2);
+}
+
+.sort-input:focus {
+    outline: none !important;
+    background: rgba(0, 162, 255, 0.15) !important;
+    border-color: #00a2ff !important;
+    box-shadow: 0 0 0 3px rgba(0, 162, 255, 0.15), 0 4px 12px rgba(0, 162, 255, 0.25);
+    color: #fff !important;
+}
+
+ /* 滚动条 */
+ ::-webkit-scrollbar{width:8px;height:8px}
+ ::-webkit-scrollbar-track{background:rgba(0,0,0,.1);border-radius:4px}
+ ::-webkit-scrollbar-thumb{background:linear-gradient(135deg,#00a2ff,#0066cc);border-radius:4px}
+
+ /* 导航条（侧边栏）滚动条：紫色 + 白色 */
+ #sidebar,
+ #sidebar .nav-collapse,
+ #sidebar .sidebar-menu{
+     scrollbar-color:#7c4dff #ffffff;   /* Firefox */
+     scrollbar-width:thin;
+ }
+ #sidebar::-webkit-scrollbar{width:8px}
+ #sidebar::-webkit-scrollbar-track{background:#000000;border-radius:4px}
+ #sidebar::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#7c4dff 0%, #b388ff 100%);border-radius:4px;border:1px solid #d1b8ff}
+ #sidebar::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#6a3df4 0%, #a87bff 100%)}
+ /* 二级容器若出现滚动 */
+ #sidebar ul.sub::-webkit-scrollbar{width:6px}
+ #sidebar ul.sub::-webkit-scrollbar-track{background:#000000}
+ #sidebar ul.sub::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#7c4dff 0%, #b388ff 100%);border-radius:4px}
+ 
+

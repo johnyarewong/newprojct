@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+  /* 在X5新内核Blink中，在排版页面的时候，会主动对字体进行放大，会检测页面中的主字体，当某一块字体在我们的判定规则中，认为字号较小，并且是页面中的主要字体，就会采取主动放大的操作。然而这不是我们想要的，可以采取给最大高度解决 */
+  max-height: 100000px;
+}
+*:before, *:after {
+    box-sizing: border-box;
+    max-height: 100000px;
+}
+*, *:before, *:after {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th,textarea, td {
+  border: 0;
+  font-size: small;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+table{
+  border-collapse:collapse;
+  border-spacing:0;
+}
+em, strong,i{
+  font-style: normal;
+  font-size:large;
+}
+ul, ol, li {
+  list-style: none;
+}
+input{
+  outline: none;
+}
+a {
+  text-decoration: none;
+  outline: none;
+}
+a:active,a:hover {
+  outline: 0;
+}
+a,button,input,textarea{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+img{
+  border:0;
+  vertical-align: middle;
+  pointer-events: none;
+}
+body{
+  height: 100%;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+a,img{
+  display: block;
+  max-width: 100%;
+}
+input {
+  -webkit-appearance:none; /*去除input默认样式*/
+  outline: none;
+  border-radius: 0;
+  border: none;
+}
+textarea{outline:none;resize:none;autofocus:true}

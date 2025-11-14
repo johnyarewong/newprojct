@@ -1,0 +1,79 @@
+
+  .xiugai-left{
+    width: 25%;
+    float: left;
+    position: relative;
+  }
+ 
+  .xiugai-left .avatar .xiugai-bk{
+  	width: 100%;
+    height: 91px;
+    display: block;
+    border-right: 1px dashed #eff0f4;
+  
+  }
+ 
+
+
+.foot-row{
+	position: fixed;
+ 	bottom: 0px;
+	left: 0px;
+  	width:100%;
+  	z-index: 100;
+  	margin-left: 0px; 
+  	margin-right: 0px;
+	height: 50px;
+    border-top: 1px rgba(23, 22, 22, 0.07) solid;
+}
+
+.foot-row .panel .panel-body li{
+	list-style: none;
+}
+.foot-row .panel .panel-body .fa{
+	    font-size: 25px;
+
+}
+.foot-row .panel .panel-body .avatar ,.foot-row .panel .panel-body .activity-desk{
+	text-align: center;
+	 margin-top: 5px;
+}
+.foot-row .panel .panel-body .activity-desk h6{
+	margin-top: -2px;
+    margin-bottom: 5px;
+
+}
+
+.state-overview .panel{
+    padding: 10px 10px;
+}
+.xg-left{
+    position: fixed;
+    top: 0;
+    left: 10px;
+    width: 100%;
+    z-index: 100;
+    line-height: 45px;
+    font-size: 30px;
+}
+
+.ico-bottom-center{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.xz-label{
+	    width: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 60px;
+  
+}
+
+.xz-label input{
+    float: right;
+    position: absolute;
+    right: 25px;
+    top: 24px;
+
+}

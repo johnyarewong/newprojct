@@ -1,0 +1,89 @@
+
+    <!-- js placed at the end of the document so the pages load faster -->
+                    <audio id="audio" hidden="hidden"  loop="loop" preload="auto" controls="controls"src="../../../sy.mp3">       
+</audio> <!--语音提示 end-->
+    <script src="__ADMIN__/js/bootstrap.min.js"></script>
+    <script src="__ADMIN__/js/jquery.scrollTo.min.js"></script>
+    <script src="__ADMIN__/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script>
+    // 修复 passive event listener 警告
+    (function() {
+        if (typeof jQuery !== 'undefined') {
+            jQuery.event.special.touchstart = {
+                setup: function( _, ns, handle ) {
+                    this.addEventListener("touchstart", handle, { passive: !ns.includes("noPreventDefault") });
+                }
+            };
+            jQuery.event.special.touchmove = {
+                setup: function( _, ns, handle ) {
+                    this.addEventListener("touchmove", handle, { passive: !ns.includes("noPreventDefault") });
+                }
+            };
+            jQuery.event.special.wheel = {
+                setup: function( _, ns, handle ) {
+                    this.addEventListener("wheel", handle, { passive: true });
+                }
+            };
+            jQuery.event.special.mousewheel = {
+                setup: function( _, ns, handle ) {
+                    this.addEventListener("mousewheel", handle, { passive: true });
+                }
+            };
+        }
+    })();
+    </script>
+    <script src="__ADMIN__/js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="__ADMIN__/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="__ADMIN__/js/owl.carousel.js" ></script>
+    <script src="__ADMIN__/js/jquery.customSelect.min.js" ></script>
+
+    <!--common script for all pages-->
+    <script src="__ADMIN__/js/common-scripts.js"></script>
+
+    <!--script for this page-->
+    <script src="__ADMIN__/js/sparkline-chart.js"></script>
+    <script src="__ADMIN__/js/easy-pie-chart.js"></script>
+
+    <!-- active -->
+    <script src="/static/public/js/function.js"></script>
+     
+    <!-- date -->
+    <script type="text/javascript" src="__ADMIN__/js/date/jquery.datetimepicker.js" charset="UTF-8"></script>
+    <script>
+    		 var media = document.getElementById('audio'); 
+    		 var audioEnabled = false;
+    		 
+    		 // 监听用户首次交互以启用音频
+    		 document.addEventListener('click', function() {
+    		 	audioEnabled = true;
+    		 }, { once: true });
+    		 
+	 setInterval(function() {
+				$.ajax({
+					url:"/admin/user/headerData",
+					type:"get",
+					success:function(res){
+						if(res.data.cz>0||res.data.with > 0||res.data.jy>0){
+							if(res.data.cz>0){
+								media.src='https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text=互金所提醒您有充值订单，请及时处理';
+							}else if(res.data.with > 0){
+								media.src='https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text=互金所提醒您有提现订单，请及时处理';
+							}else if(res.data.jy > 0){
+								media.src='https://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text=互金所提醒您有交易订单，请及时处理';
+							}
+							// 只在用户已交互后播放音频
+							if(audioEnabled) {
+								media.play().catch(function(error) {
+									console.log('音频播放失败:', error);
+								});
+							}
+							$("#czcount").html("充值("+res.data.cz+")")
+							$("#withcount").html("提现("+res.data.with+")")
+							$("#jycount").html("交易订单("+res.data.jy+")")
+						}
+					}
+				})
+    },10000);   /*提现语音提示结束*/
+</script>
+  </body>
+</html>

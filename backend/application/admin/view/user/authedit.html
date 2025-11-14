@@ -1,0 +1,239 @@
+<title>实名认证修改 </title>
+
+{include file="head" /}
+
+{include file="menu" /}
+
+   <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!-- page start-->
+              <div class="row">
+                  <div class="col-lg-8">
+                      <!--widget start-->
+                      <aside class="profile-nav alt green-border">
+                          <section class="panel">
+                              
+                     
+                              <div class="panel-body bio-graph-info">
+							   <h1> 修改用户{$userinfo.utel}实名信息</h1>
+                              <div class="form-horizontal">
+                                  
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">用户id：</label>
+                                      <div class="col-lg-6">
+											<input type="hidden" class="form-control" name = 'uid' value="{$uid}" >
+
+                                          <p class="control-label">{$uid}</p>
+                                      </div> 
+                                  </div> 
+									<hr> 
+									 <div class="form-group">
+									     <label class="col-lg-2 control-label">身份正面：</label>
+									     <div class="col-lg-6">					
+											<div class="img-list">
+												 <input type="file" name="cardpic" id="cardpic" />
+												 <img  class="pic-img" src="{$userinfo.cardpic}" style="width:300px;height:300px">											 
+											 </div>
+									     </div> 
+									 </div> 
+									<hr>
+									<div class="form-group">
+									     <label class="col-lg-2 control-label">身份反面：</label>
+									     <div class="col-lg-6">
+											 <div class="img-list">
+												 <input type="file" name="cardpic1"  id="cardpic1"/>
+												 <img class="pic-img" src="{$userinfo.cardpic1}" style="width:300px;height:300px">
+											 </div> 
+										 </div> 
+									 </div> 
+									<hr>
+								 <div class="form-group">
+                                      <div class="col-lg-offset-2 col-lg-10">
+                                          <input type="submit" value="修改" onclick="editAuth()"  class="btn btn-success">
+										  <a style="margin-left: 20px;" href="{:url('user/auth')}"><button type="submit" class="btn btn-danger">返回</button></a>                                          
+                                      </div>
+                                  </div>
+
+
+                                  
+                              </div>
+
+
+
+                          </div>
+                     
+
+                          </section>
+                      </aside>
+                      <!--widget end-->
+                      
+                  </div>
+                 </div> 
+              
+                 
+              
+              <!-- page end-->
+           </section>
+      </section>
+      <!--main content end-->
+  </section>
+<script src="__ADMIN__/js/lk/c.js"></script>
+{include file="foot" /}
+<script>
+	function editAuth(){
+		var len=0;
+		var imgIndex=0;
+		for(let i=0;i<$('.pic-img').length;i++){
+			if($(".pic-img")[i].getAttribute('data-type')==1){
+				len++;	
+				imgIndex=i;
+			}
+		}
+		if(len){
+			var data=new FormData();
+			data.append('uid',{$uid});
+			if($('.pic-img').length==len){
+				data.append('cardpic', convertBase64UrlToBlob($(".pic-img")[0].getAttribute('src')),"image.png");
+				data.append('cardpic1', convertBase64UrlToBlob($(".pic-img")[1].getAttribute('src')),"image.png");
+			}else{
+				if(imgIndex==0){
+					data.append('cardpic', convertBase64UrlToBlob($(".pic-img")[0].getAttribute('src')),"image.png");
+				}else{
+					data.append('cardpic1', convertBase64UrlToBlob($(".pic-img")[1].getAttribute('src')),"image.png");
+				}
+			}
+			$(this).attr('disabled',true);
+			$.ajax({  
+				url: "/admin/user/authEditPost",
+				type: 'POST',  
+				data: data,  
+				dataType: 'JSON',  
+				cache: false,  
+				processData: false,  
+				contentType: false  
+			}).done(function(ret){
+				setTimeout(function(){
+					window.history.back();
+				},2000)
+				layer.msg(ret.data);
+			});	
+		}else{
+			layer.msg('未做修改');
+		}
+	}
+$("#cardpic").change(function(){
+	uploadfile($(this));
+ });
+$("#cardpic1").change(function(){
+	uploadfile($(this));
+});
+     function uploadfile(that){
+		let file=$(that)[0].files[0];
+		if(file){	
+			
+			let filePath = $(that).val(),         //获取到input的value，里面是文件的路径
+	            fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
+				 // 检查是否是图片
+	        if( !fileFormat.match(/.png|.jpg|.jpeg/) ) {
+	            alert('上传错误,文件格式必须为：png/jpg/jpeg');
+	            return;  
+	        }
+	        
+				// 调用函数，对图片进行压缩
+	        directTurnIntoBase64(file,function(imgBase64){
+				$(that).parent().find("img")[0].style.display="block";
+	            $(that).parent().find("img")[0].setAttribute('src',imgBase64);
+	            $(that).parent().find("img")[0].setAttribute('data-type',1);
+	        });
+     	
+		}
+     }
+
+
+function compress(fileObj, callback) { 
+        if ( typeof (FileReader) === 'undefined') {  
+            console.log("当前浏览器内核不支持base64图标压缩");  
+            //调用上传方式不压缩  
+            directTurnIntoBase64(fileObj,callback);
+        } else {  
+            try {    
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    var image = $('<img/>');  
+                    image.load(function(){  
+                        square = 700,   //定义画布的大小，也就是图片压缩之后的像素
+                        canvas = document.createElement('canvas'), 
+                        context = canvas.getContext('2d'),
+                        imageWidth = 0,    //压缩图片的大小
+                        imageHeight = 0, 
+                        offsetX = 0, 
+                        offsetY = 0,
+                        data = ''; 
+ 
+                        canvas.width = square;  
+                        canvas.height = square; 
+                        context.clearRect(0, 0, square, square);   
+ 
+                        if (this.width > this.height) {  
+                            imageWidth = Math.round(square * this.width / this.height);  
+                            imageHeight = square;  
+                            offsetX = - Math.round((imageWidth - square) / 2);  
+                        } else {  
+                            imageHeight = Math.round(square * this.height / this.width);  
+                            imageWidth = square;  
+                            offsetY = - Math.round((imageHeight - square) / 2);  
+                        }  
+                        context.drawImage(this, offsetX, offsetY, imageWidth, imageHeight);  
+                        var data = canvas.toDataURL('image/jpeg');  
+                        //压缩完成执行回调  
+                         callback(data);  
+                    });  
+                    image.attr('src', e.target.result);  
+                };  
+                reader.readAsDataURL(fileObj);  
+            }catch(e){  
+                console.log("压缩失败!");  
+                //调用直接上传方式  不压缩 
+                directTurnIntoBase64(fileObj,callback); 
+            }  
+        }
+}
+//图片格式转化
+
+function convertBase64UrlToBlob(urlData) {
+
+var bytes = window.atob(urlData.split(',')[1]); //去掉url的头，并转换为byte
+
+//处理异常,将ascii码小于0的转换为大于0
+
+var ab = new ArrayBuffer(bytes.length);
+
+var ia = new Uint8Array(ab);
+
+for (var i = 0; i < bytes.length; i++) {
+
+ia[i] = bytes.charCodeAt(i);
+
+}
+
+
+return new Blob([ab], {
+
+type: 'image/png'
+
+});
+
+}
+// 不对图片进行压缩，直接转成base64
+function directTurnIntoBase64(fileObj,callback){
+	var r = new FileReader();
+	// 转成base64
+	r.onload = function(){
+	   //变成字符串
+		imgBase64 = r.result;
+		callback(imgBase64);
+	}
+	r.readAsDataURL(fileObj);    //转成Base64格式
+}
+</script>

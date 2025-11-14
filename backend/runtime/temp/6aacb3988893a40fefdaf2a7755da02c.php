@@ -1,0 +1,1520 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:71:"/www/wwwroot/api.jpcryptoex.vip/application/index/view/index/index.html";i:1762743063;}*/ ?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!-- 是否启用全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 全屏时状态颜色设置 -->
+    <meta name="apple-mobile-web-status-bar-style" content="white">
+    <!-- 禁用电话号码自动识别 -->
+    <meta name="format-detection" content="telephone=no">
+    <!--禁止读取本地缓存模板-->
+    <meta http-equiv="Pragma" contect="no-cache">
+    <!-- iPhone 启动图标 -->
+    <link rel="apple-touch-icon" href="img/logo.png">
+    <!-- Android 启动图标 -->
+    <link rel="shortcut icon" href="img/logo.png">
+    <meta name="viewport"
+          content="width=device-width,height=device-height,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <style>
+        html {
+            font-size: 50px;
+        }
+    </style>
+    <script src="/static/index/jquery-2.1.4.min.js"></script>
+    <script src="/static/index/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/static/index/swiper.min.css">
+    <script src="/static/index/swiper.min.js"></script>
+    <script src="/static/index/vue.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+//设置适配rem
+            var change_rem = ((window.screen.width > 450) ? 450 : window.screen.width) / 375 * 100;
+            document.getElementsByTagName("html")[0].style.fontSize = change_rem + "px";
+            window.onresize = function () {
+                change_rem = ((window.screen.width > 450) ? 450 : window.screen.width) / 375 * 100;
+                document.getElementsByTagName("html")[0].style.fontSize = change_rem + "px";
+            }
+        }
+    </script>
+
+    <title><?php echo lang('sy'); ?></title>
+
+    <style>
+        .el-message-box {
+            width: 74% !important;
+        }
+
+        .el-button--primary {
+            background-color: #0b7dd5 !important;
+            border-color: #0b7dd5 !important;
+        }
+
+        input::-webkit-input-placeholder {
+            color: #C6CED3 !important;
+        }
+    </style>
+    <script>
+        if (document.documentElement.clientWidth > 640) {
+
+            (function (designWidth, maxWidth) {
+                var doc = document,
+                    win = window,
+                    docEl = doc.documentElement,
+                    remStyle = document.createElement("style"),
+                    tid;
+
+                function refreshRem() {
+                    var width = docEl.getBoundingClientRect().width;
+                    maxWidth = maxWidth || 540;
+                    width > maxWidth && (width = maxWidth);
+                    var rem = width * 100 / designWidth;
+                    remStyle.innerHTML = 'html{font-size:' + rem + 'px;}';
+                }
+
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(remStyle);
+                } else {
+                    var wrap = doc.createElement("div");
+                    wrap.appendChild(remStyle);
+                    doc.write(wrap.innerHTML);
+                    wrap = null;
+                }
+                //要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；
+                refreshRem();
+
+                win.addEventListener("resize", function () {
+                    clearTimeout(tid); //防止执行两次
+                    tid = setTimeout(refreshRem, 300);
+                }, false);
+
+                win.addEventListener("pageshow", function (e) {
+                    if (e.persisted) { // 浏览器后退的时候重新计算
+                        clearTimeout(tid);
+                        tid = setTimeout(refreshRem, 300);
+                    }
+                }, false);
+
+                if (doc.readyState === "complete") {
+                    doc.body.style.fontSize = "16px";
+                } else {
+                    doc.addEventListener("DOMContentLoaded", function (e) {
+                        doc.body.style.fontSize = "16px";
+                    }, false);
+                }
+            })(1920, 5800);
+        } else {
+
+            (function (designWidth, maxWidth) {
+                var doc = document,
+                    win = window,
+                    docEl = doc.documentElement,
+                    remStyle = document.createElement("style"),
+                    tid;
+
+                function refreshRem() {
+                    var width = docEl.getBoundingClientRect().width;
+                    maxWidth = maxWidth || 540;
+                    width > maxWidth && (width = maxWidth);
+                    var rem = width * 100 / designWidth;
+                    remStyle.innerHTML = 'html{font-size:' + rem + 'px;}';
+                }
+
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(remStyle);
+                } else {
+                    var wrap = doc.createElement("div");
+                    wrap.appendChild(remStyle);
+                    doc.write(wrap.innerHTML);
+                    wrap = null;
+                }
+                //要等 wiewport 设置好后才能执行 refreshRem，不然 refreshRem 会执行2次；
+                refreshRem();
+
+                win.addEventListener("resize", function () {
+                    clearTimeout(tid); //防止执行两次
+                    tid = setTimeout(refreshRem, 300);
+                }, false);
+
+                win.addEventListener("pageshow", function (e) {
+                    if (e.persisted) { // 浏览器后退的时候重新计算
+                        clearTimeout(tid);
+                        tid = setTimeout(refreshRem, 300);
+                    }
+                }, false);
+
+                if (doc.readyState === "complete") {
+                    doc.body.style.fontSize = "16px";
+                } else {
+                    doc.addEventListener("DOMContentLoaded", function (e) {
+                        doc.body.style.fontSize = "16px";
+                    }, false);
+                }
+            })(750, 1000);
+        }
+    </script>
+    <style>
+        html {
+            font-size: 55.2px;
+        }
+    </style>
+    <style>
+        html {
+            font-size: 50px;
+        }
+    </style>
+
+    <link href="/static/index/app.956172e3885869e99650ab970e9b583d.css" rel="stylesheet">
+    <script src="/static/index/layer.js"></script>
+    <link rel="stylesheet" href="/static/index/layer.css">
+    <!-- 公共函数 -->
+    <script src="/static/index/function.js"></script>
+    <script src="/static/index/base64.js"></script>
+    <script type="text/javascript">
+        var Base64 = new Base64();
+    </script>
+    <style type="text/css">
+        @charset "UTF-8";
+
+        /* px转换为vw */
+        .m-picker {
+            font-size: 4.26667vw;
+            color: #666;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .m-picker .m-picker-item-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            overflow: hidden;
+        }
+
+        .m-picker .m-picker-mark {
+            position: absolute;
+            z-index: 99;
+            background: #000;
+            opacity: 0.6;
+            width: 100%;
+            height: 100%;
+        }
+
+        .m-picker .m-picker-header {
+            position: relative;
+            display: flex;
+            height: 10.66667vw;
+            line-height: 10.66667vw;
+            border-bottom: 1px solid #eee;
+            box-sizing: border-box;
+            padding: 0 5.33333vw;
+            justify-content: space-between;
+        }
+
+        .m-picker .m-picker-header span:last-of-type {
+            color: #62a2dd;
+        }
+
+        .m-picker .m-picker-box {
+            position: absolute;
+            z-index: 100;
+            bottom: 0;
+            background: #fff;
+            width: 100%;
+            height: 94.66667vw;
+        }
+
+        .m-picker-item {
+            position: relative;
+            width: 100%;
+            height: 84vw;
+            overflow: hidden;
+        }
+
+        .m-picker-item .m-scroller-item-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .m-picker-item .m-scroller-item {
+            text-align: center;
+            font-size: 4.8vw;
+            height: 9.33333vw;
+            line-height: 9.33333vw;
+        }
+
+        .m-picker-item .m-scroller-mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            margin: 0 auto;
+            width: 100%;
+            z-index: 3;
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6)), linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6));
+            background-position: top, bottom;
+            background-size: 100% 37.33333vw;
+            background-repeat: no-repeat;
+        }
+
+        .m-picker-item .m-scroller-indicator {
+            width: 100%;
+            height: 9.33333vw;
+            position: absolute;
+            left: 0;
+            top: 37.33333vw;
+            z-index: 2;
+            box-sizing: border-box;
+            background-image: linear-gradient(to bottom, #d0d0d0, #d0d0d0, transparent, transparent), linear-gradient(to top, #d0d0d0, #d0d0d0, transparent, transparent);
+            background-position: top, bottom;
+            background-size: 100% 2px;
+            background-repeat: no-repeat;
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .3s;
+            -webkit-transition: opacity .3s;
+            opacity: 1;
+        }
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+        }
+    </style>
+    <style type="text/css">
+        .box1[data-v-0c912c96] {
+            width: 100%;
+            height: auto;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            background: #f7f7fa;
+            overflow-y: scroll;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .box1 .head[data-v-0c912c96] {
+            height: 0.88rem;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 100%;
+            background: #d22727;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        .box1 .head .title[data-v-0c912c96] {
+            font: 16px;
+            color: #fde580;
+        }
+
+        .box1 .head .line[data-v-0c912c96] {
+            color: #fff;
+            padding-left: 20px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .box1 .head .line img[data-v-0c912c96] {
+            margin-top: 2px;
+            width: 0.23rem;
+            height: 0.23rem;
+        }
+
+        .box1 .head .emp[data-v-0c912c96] {
+            padding-right: 20px;
+        }
+
+        .box1 .head .choiceWay[data-v-0c912c96] {
+            position: absolute;
+            font-size: 0.3rem;
+            width: 2.5rem;
+            padding: 0.3rem 0 0.3rem 10px;
+            background: #fff;
+            top: 60px;
+            height: 1.3rem;
+            border-radius: 3px;
+            left: 20px;
+            z-index: 99;
+        }
+
+        .box1 .head .choiceWay img[data-v-0c912c96] {
+            width: 0.23rem;
+            height: 0.23rem;
+            position: absolute;
+            top: -0.17rem;
+            left: 0.3rem;
+        }
+    </style>
+    <style type="text/css">
+        .box[data-v-eda7ae8c] {
+            position: relative;
+            width: 100%;
+            height: 0.88rem;
+            color: #fff;
+            z-index: 10;
+            background: #fff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            border: 1px solid #e7eaed;
+        }
+
+        .box span[data-v-eda7ae8c] {
+            width: 33%;
+        }
+
+        .box .title[data-v-eda7ae8c] {
+            height: 0.34rem;
+        }
+
+        .box .service[data-v-eda7ae8c] {
+            color: #f0d28c;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-right: 0.2rem;
+        }
+
+        .box .service img[data-v-eda7ae8c] {
+            width: 0.37rem;
+            height: 0.4rem;
+        }
+
+        .box .model[data-v-eda7ae8c] {
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            background: #000;
+        }
+
+        .box .line[data-v-eda7ae8c] {
+            width: 40%;
+            height: 2rem;
+            background: #fff;
+            position: fixed;
+            z-index: 2000;
+            left: 30%;
+            top: 40%;
+        }
+
+        .box .line .line1[data-v-eda7ae8c] {
+            width: 100%;
+            height: 1rem;
+            line-height: 1rem;
+            text-align: center;
+            color: #f34917;
+            border-bottom: 1px solid #f7f7f7;
+        }
+
+        .box .line .line2[data-v-eda7ae8c] {
+            width: 100%;
+            height: 1rem;
+            line-height: 1rem;
+            color: #f34917;
+            text-align: center;
+        }
+    </style>
+    <style type="text/css">
+        .swiper-container[data-v-1cb1d4cd] {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            margin-top: -10%;
+        }
+
+        .swiper-slide[data-v-1cb1d4cd] {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            width: 80vw;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-transition: 300ms;
+            transition: 300ms;
+            -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+        }
+
+        . -active[data-v-1cb1d4cd],
+        .swiper-slide-duplicate-active[data-v-1cb1d4cd] {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        img[data-v-1cb1d4cd] {
+            width: 80vw;
+            height: 100%;
+            border-radius: 0.1rem;
+        }
+    </style>
+    <style type="text/css">
+        .box[data-v-0dc05a45] {
+            width: 93%;
+            height: 0.7rem;
+            border-radius: 0.35rem;
+            margin: 0 auto;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background: #f7f7fa;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding-top: 0.1rem;
+            align-items: center;
+        }
+
+        .box img[data-v-0dc05a45] {
+            width: 0.27rem;
+            height: 0.27rem;
+            margin-left: 0.25rem;
+        }
+
+        .box .tip-title[data-v-0dc05a45] {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            padding: 0.41rem 0 0.31rem 0;
+            text-align: center;
+            font-size: 0.28rem;
+            font-weight: 500;
+            color: #333;
+            text-align: center;
+        }
+
+        .box .tip-title .line[data-v-0dc05a45] {
+            width: 1.5rem;
+            height: 0.03rem;
+            margin-right: 0.5rem;
+            background: -webkit-gradient(linear, right top, left top, from(#f00), to(#fff));
+            background: linear-gradient(to left, #f00, #fff);
+        }
+
+        .box .tip-title .line1[data-v-0dc05a45] {
+            width: 1.5rem;
+            height: 0.03rem;
+            margin-left: 0.5rem;
+            background: -webkit-gradient(linear, left top, right top, from(#f00), to(#fff));
+            background: linear-gradient(to right, #f00, #fff);
+        }
+
+        .box marquee[data-v-0dc05a45] {
+            font-size: 14px;
+            line-height: 24px;
+            width: 100%;
+            color: #62759a;
+            margin-left: 0.2rem;
+        }
+
+        .box marquee .li[data-v-0dc05a45] {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding: 0 0.2rem;
+        }
+
+        .box marquee .li p[data-v-0dc05a45] {
+            width: 99%;
+            /*overflow: hidden;*/
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+    <style type="text/css">
+        .nav[data-v-be3a9f74] {
+            width: 95%;
+            height: 1.6rem;
+            padding: 0.2rem 2.5%;
+            overflow: hidden;
+            overflow-x: scroll;
+        }
+
+        .nav .ul[data-v-be3a9f74] {
+            height: 1.6rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            width: auto;
+        }
+
+        .nav .ul .li[data-v-be3a9f74] {
+            width: 2.3rem;
+            height: 1.6rem;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            background: #fff;
+            border-radius: 0.1rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            text-align: center;
+            margin-right: 0.2rem;
+        }
+
+        .nav .ul .li .p1[data-v-be3a9f74] {
+            font-size: 0.22rem;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 0.1rem;
+        }
+
+        .nav .ul .li .p2[data-v-be3a9f74] {
+            font-size: 0.32rem;
+        }
+
+        .nav .ul .li .p3[data-v-be3a9f74] {
+            font-size: 0.22rem;
+        }
+    </style>
+    <style type="text/css">
+        .box[data-v-12171d70] {
+            margin: 0;
+            width: 100%;
+        }
+
+        .box #nav[data-v-12171d70] {
+            width: 100vw;
+            height: 0.88rem;
+            background: #fff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .box #nav .Li[data-v-12171d70] {
+            width: 50%;
+            line-height: 0.88rem;
+            color: #90A2B0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.3rem;
+        }
+
+        .box #nav .active[data-v-12171d70] {
+            color: #0b7dd5;
+            width: 30%;
+            margin: 0 auto;
+            text-align: center;
+            border-bottom: 2px solid #0b7dd5;
+        }
+
+        .box .title[data-v-12171d70] {
+            width: 90%;
+            margin: 0 auto;
+            height: 0.5rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            font-size: 0.24rem;
+            color: #90a2b0;
+            background: #f7f7fa;
+            text-align: center;
+        }
+
+        .box .title .p1[data-v-12171d70] {
+            width: 20%;
+        }
+
+        .box .title .p2[data-v-12171d70] {
+            width: 40%;
+            padding-left: 10%;
+        }
+
+        .box .title .p3[data-v-12171d70] {
+            width: 30%;
+        }
+
+        .box .title1[data-v-12171d70] {
+            width: 90%;
+            margin: 0 auto;
+            height: 0.5rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            font-size: 0.24rem;
+            color: #90a2b0;
+            background: #f7f7fa;
+            text-align: center;
+        }
+
+        .box .title1 .p1[data-v-12171d70] {
+            width: 20%;
+        }
+
+        .box .title1 .p2[data-v-12171d70] {
+            width: 40%;
+            padding-left: 10%;
+        }
+
+        .box .title1 .p3[data-v-12171d70] {
+            width: 30%;
+        }
+
+        .box .ul[data-v-12171d70] {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .box .ul .Li[data-v-12171d70] {
+            margin: 0 auto;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            border-bottom: 1px solid #eff2f4;
+            background: #fff;
+            height: 1rem;
+            padding: 0 0.2rem;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .box .ul .Li .p1[data-v-12171d70] {
+            color: #1c1d31;
+            font-size: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .box .ul .Li .p2[data-v-12171d70] {
+            color: #90a2b0;
+            font-size: 0.26rem;
+        }
+
+        .box .ul .Li .p3[data-v-12171d70] {
+            color: #59bb5f;
+        }
+
+        .box .ul .Li .p4[data-v-12171d70] {
+            color: #ea4d3d;
+        }
+
+        .box .ul .Li .p5[data-v-12171d70] {
+            color: #fff;
+        }
+
+        .box .ul .Li .p6[data-v-12171d70] {
+            color: #fff;
+        }
+
+        .box .ul .Li .left[data-v-12171d70] {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 40%;
+        }
+
+        .box .ul .Li .left img[data-v-12171d70] {
+            width: 0.48rem;
+            height: 0.48rem;
+            margin-right: 0.3rem;
+        }
+
+        .box .ul .Li .center[data-v-12171d70] {
+            width: 35%;
+        }
+
+        .box .ul .Li .right[data-v-12171d70] {
+            width: 25%;
+        }
+
+        .box .ul .Li .right .zf[data-v-12171d70] {
+            width: 1.5rem;
+            height: 0.65rem;
+            border-radius: 0.08rem;
+            line-height: 0.65rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .box .ul .Li .right .zf2[data-v-12171d70] {
+            padding: 0 0.1rem;
+            height: 0.65rem;
+            width: 1.5rem;
+            background: #0b7dd5;
+            color: #fff;
+            border-radius: 0.08rem;
+            line-height: 0.65rem;
+            text-align: center;
+        }
+    </style>
+    <style type="text/css">
+        .on[data-v-28ad7794] {
+            color: #0b7dd5;
+        }
+
+        .in[data-v-28ad7794] {
+            color: #90a2b0;
+        }
+
+        .box[data-v-28ad7794] {
+            position: fixed;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            left: 0;
+            font-size: 12px;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            background: #fff;
+            z-index: 100;
+        }
+
+        .box .li[data-v-28ad7794] {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .box .li img[data-v-28ad7794] {
+            width: 20px;
+            height: 20px;
+        }
+
+        .box .li span[data-v-28ad7794] {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            vertical-align: baseline;
+            font: inherit;
+            font-size: 100%;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <style type="text/css">
+        a {
+            text-decoration: none;
+        }
+    </style>
+
+    <style type="text/css">
+        .box1[data-v-fb4b8be8] {
+            width: 100%;
+            height: 100vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            background: #f7f7fa;
+            overflow-y: scroll;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .box1 .header[data-v-fb4b8be8] {
+            width: 90%;
+            padding: 0 5%;
+            height: 0.88rem;
+            position: fixed;
+            top: 0;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            background: #fff;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .box1 .header span[data-v-fb4b8be8] {
+            color: #1c1d31;
+            font-size: 0.36rem;
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .box1 .header img[data-v-fb4b8be8] {
+            width: 0.37rem;
+            height: 0.4rem;
+        }
+    </style>
+    <style type="text/css">
+        #nav[data-v-76b6b367] {
+            width: 100vw;
+            height: 0.88rem;
+            background: #fff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            position: fixed;
+            top: 0.88rem;
+            border-top: 1px solid #e7eaed;
+        }
+
+        #nav .Li[data-v-76b6b367] {
+            width: 100%;
+            line-height: 0.88rem;
+            color: #62759a;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.3rem;
+            color: rgb(144, 162, 176);
+        }
+
+        #nav .Li[data-v-76b6b367] .active {
+            color: #0b7dd5;
+        }
+
+        #nav .active[data-v-76b6b367] {
+            color: #0b7dd5;
+            width: 20%;
+            margin: 0 auto;
+            text-align: center;
+            border-bottom: 2px solid #0b7dd5;
+        }
+
+        .title[data-v-76b6b367] {
+            width: 90%;
+            margin: 0 auto;
+            height: 0.5rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            font-size: 0.24rem;
+            color: #90a2b0;
+            margin-top: 2rem;
+            background: #f7f7fa;
+            text-align: center;
+        }
+
+        .title .p1[data-v-76b6b367] {
+            width: 20%;
+        }
+
+        .title .p2[data-v-76b6b367] {
+            width: 50%;
+            padding-left: 10%;
+        }
+
+        .title .p3[data-v-76b6b367] {
+            width: 20%;
+        }
+
+        .mask[data-v-76b6b367] {
+            position: absolute;
+            top: 51px;
+            width: 100%;
+            height: 80vh;
+            background: #f7f7f7;
+        }
+
+        .Currency[data-v-76b6b367] {
+            width: 94.6%;
+            padding: 0 0.2rem;
+            margin-top: 0.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .Currency .ul[data-v-76b6b367] {
+            margin: 0 auto;
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+        .Currency .ul .Li[data-v-76b6b367] {
+            margin: 0 auto;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            background: #fff;
+            height: 1.4rem;
+            padding: 0 0.2rem;
+            border-radius: 0.2rem;
+            margin-bottom: 0.2rem;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .Currency .ul .Li .p1[data-v-76b6b367] {
+            color: #1c1d31;
+            font-size: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .Currency .ul .Li .p2[data-v-76b6b367] {
+            color: #90a2b0;
+            font-size: 0.26rem;
+        }
+
+        .Currency .ul .Li .p3[data-v-76b6b367] {
+            color: #59bb5f;
+        }
+
+        .Currency .ul .Li .p4[data-v-76b6b367] {
+            color: #ea4d3d;
+        }
+
+        .Currency .ul .Li .p5[data-v-76b6b367] {
+            background: #59bb5f;
+            color: #fff;
+        }
+
+        .Currency .ul .Li .p6[data-v-76b6b367] {
+            background: #ea4d3d;
+            color: #fff;
+        }
+
+        .Currency .ul .Li .left[data-v-76b6b367] {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 50%;
+        }
+
+        .Currency .ul .Li .left img[data-v-76b6b367] {
+            width: 0.48rem;
+            height: 0.48rem;
+            margin-right: 0.3rem;
+        }
+
+        .Currency .ul .Li .center[data-v-76b6b367] {
+            width: 28%;
+        }
+
+        .Currency .ul .Li .right[data-v-76b6b367] {
+            width: 22%;
+        }
+
+        .Currency .ul .Li .right .zf[data-v-76b6b367] {
+            width: 1.5rem;
+            height: 0.65rem;
+            border-radius: 0.08rem;
+            line-height: 0.65rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .Currency .login[data-v-76b6b367] {
+            background: #fff;
+            height: calc(100vh - 3.5rem);
+            position: absolute;
+            top: 2.5rem;
+            width: 100%;
+            left: 0;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .Currency .login .p1[data-v-76b6b367] {
+            font-size: 0.36rem;
+            color: #8d9dbc;
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+        }
+
+        .Currency .login .btn[data-v-76b6b367] {
+            color: #fff;
+            font-size: 0.32rem;
+            border-radius: 0.4rem;
+            background: #0b7dd5;
+            width: 1.9rem;
+            height: 0.6rem;
+            text-align: center;
+            line-height: 0.6rem;
+        }
+    </style>
+</head>
+
+<!--<body style="background: rgb(248, 248, 248); font-size: 16px;">-->
+<body style="background: rgb(255, 255, 255); font-size: 16px;">
+<style>
+    .index-for-top {
+        /*position: fixed;*/
+        /*top: 0;*/
+        width: 100%;
+        z-index: 1000;
+
+        text-align: center;
+        background: #FFF;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #7CAEFF;
+    }
+</style>
+<style>
+    .langpackage {
+        float: right;
+        margin: 20px 10px;
+        position: relative;
+        width: 80px;
+    }
+    .langselect {
+        display: none;
+        background: #fff;
+        box-shadow: 0 0 5px 1px #737373;
+        border-radius: 5px;
+        position: absolute;
+        top: 36;
+        left: 0;
+        z-index: 999;
+    }
+    .langselect li {
+        line-height: 38px;
+        padding: 0 .1rem;
+    }
+    ol, ul {
+    list-style: none;
+    }
+</style>
+<div>
+    <img style="width:100%;width:35%;margin:10px;float:left;" src="<?php echo $conf['web_logo']; ?>"/>
+    <div class="langpackage" style="color:#0b7dd5;">
+        <p id="langtarger"><?php echo lang('cn'); ?> ◢ </p>
+        <ul class="langselect">
+            <li data-val="zh-cn"><?php echo lang('cn'); ?></li>
+            <li data-val="zh-en"><?php echo lang('en'); ?></li>
+             <!--li data-val="tw">香港</li-->
+        </ul>
+    </div>
+</div>
+
+<div class="index-for-top" style="">
+
+</div>
+<div id="app">
+    <div class="box1">
+        <!-- lun -->
+        <div data-v-1cb1d4cd="" data-v-0c912c96=""
+             style="width: 100vw; height: 3rem;  padding-top: 0.15rem; background: rgb(255, 255, 255);">
+            <div data-v-1cb1d4cd=""
+                 class="swiper-container swiper-container-horizontal swiper-container-coverflow swiper-container-3d swiper-container-initialized swiper-container-ios">
+                <div data-v-1cb1d4cd="" class="swiper-wrapper">
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0">
+                        <img data-v-1cb1d4cd="" src="/tu/lb01.png" alt="">
+                        <div class="swiper-slide-shadow-left" style="opacity: 6; transition-duration: 400ms;"></div>
+                        <div class="swiper-slide-shadow-right" style="opacity: 0; transition-duration: 400ms;">
+                        </div>
+                    </div>
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="1"
+                         style="width: 80vw; transition-duration: 400ms; transform: translate3d(0px, 0px, -500.057px) rotateX(0deg) rotateY(250.028deg); z-index: -4;">
+                        <img data-v-1cb1d4cd="" src="/tu/lb02.png" alt="">
+                        <div class="swiper-slide-shadow-left" style="opacity: 5.00057; transition-duration: 400ms;">
+                        </div>
+                        <div class="swiper-slide-shadow-right" style="opacity: 0; transition-duration: 400ms;">
+                        </div>
+                    </div>
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev"
+                         data-swiper-slide-index="2"
+                         style="width: 80vw; transition-duration: 400ms; transform: translate3d(0px, 0px, -400.114px) rotateX(0deg) rotateY(200.057deg); z-index: -3;">
+                        <img data-v-1cb1d4cd="" src="/tu/lb03.png" alt="">
+                        <div class="swiper-slide-shadow-left" style="opacity: 4.00114; transition-duration: 400ms;">
+                        </div>
+                        <div class="swiper-slide-shadow-right" style="opacity: 0; transition-duration: 400ms;">
+                        </div>
+                    </div>
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-duplicate-active"
+                         data-swiper-slide-index="0"
+                         style="width: 80vw; transition-duration: 400ms; transform: translate3d(0px, 0px, -299.868px) rotateX(0deg) rotateY(149.934deg); z-index: -2;">
+                        <img data-v-1cb1d4cd="" src="/tu/lb01.png" alt="">
+                        <div class="swiper-slide-shadow-left" style="opacity: 2.99868; transition-duration: 400ms;">
+                        </div>
+                        <div class="swiper-slide-shadow-right" style="opacity: 0; transition-duration: 400ms;">
+                        </div>
+                    </div>
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-duplicate-next"
+                         data-swiper-slide-index="1"
+                         style="width: 80vw; transition-duration: 400ms; transform: translate3d(0px, 0px, -199.925px) rotateX(0deg) rotateY(99.9626deg); z-index: -1;">
+                        <img data-v-1cb1d4cd="" src="/tu/lb02.png" alt="">
+                        <div class="swiper-slide-shadow-left" style="opacity: 1.99925; transition-duration: 400ms;">
+                        </div>
+                        <div class="swiper-slide-shadow-right" style="opacity: 0; transition-duration: 400ms;">
+                        </div>
+                    </div>
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2"
+                         style="width: 80vw; transition-duration: 400ms; transform: translate3d(0px, 0px, -99.9819px) rotateX(0deg) rotateY(49.9909deg); z-index: 0;">
+                        <img data-v-1cb1d4cd="" src="/tu/lb03.png" alt="">
+                        <div class="swiper-slide-shadow-left"
+                             style="opacity: 0.999819; transition-duration: 400ms;"></div>
+                        <div class="swiper-slide-shadow-right" style="opacity: 0; transition-duration: 400ms;">
+                        </div>
+                    </div>
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-duplicate swiper-slide-active"
+                         data-swiper-slide-index="0"
+                         style="width: 80vw; transition-duration: 400ms; transform: translate3d(0px, 0px, -0.0386487px) rotateX(0deg) rotateY(0.0193244deg); z-index: 1;">
+                        <img data-v-1cb1d4cd="" src="/tu/lb01.png" alt="">
+                        <div class="swiper-slide-shadow-left"
+                             style="opacity: 0.000386487; transition-duration: 400ms;"></div>
+                        <div class="swiper-slide-shadow-right" style="opacity: 0; transition-duration: 400ms;">
+                        </div>
+                    </div>
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-duplicate swiper-slide-next"
+                         data-swiper-slide-index="1"
+                         style="width: 80vw; transition-duration: 400ms; transform: translate3d(0px, 0px, -99.9046px) rotateX(0deg) rotateY(-49.9523deg); z-index: 0;">
+                        <img data-v-1cb1d4cd="" src="/tu/lb02.png" alt="">
+                        <div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 400ms;"></div>
+                        <div class="swiper-slide-shadow-right"
+                             style="opacity: 0.999046; transition-duration: 400ms;"></div>
+                    </div>
+                    <div data-v-1cb1d4cd="" class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev"
+                         data-swiper-slide-index="2"
+                         style="width: 80vw; transition-duration: 400ms; transform: translate3d(0px, 0px, -200.15px) rotateX(0deg) rotateY(-100.075deg); z-index: -1;">
+                        <img data-v-1cb1d4cd="" src="/tu/lb03.png" alt="">
+                        <div class="swiper-slide-shadow-left" style="opacity: 0; transition-duration: 400ms;"></div>
+                        <div class="swiper-slide-shadow-right" style="opacity: 2.0015; transition-duration: 400ms;">
+                        </div>
+                    </div>
+                </div>
+                <div data-v-1cb1d4cd="" class="swiper-pagination swiper-pagination-bullets">
+                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
+                        class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span>
+                </div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </div>
+        </div>
+        <div data-v-0dc05a45="" data-v-0c912c96=""
+             style="width: 100%; padding: 0.15rem 0px; background: rgb(255, 255, 255);margin-top: -10%;">
+            <div data-v-0dc05a45="" class="box"><img data-v-0dc05a45=""
+                                                     src="data:image/png;base64,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"
+                                                     alt="">
+                <marquee data-v-0dc05a45="" direction="left" scrolldelay="0" scrollamount="6" loop="loop"
+                         behavior="scroll" hspace="10" height="30" class="marquee">
+                    <div data-v-0dc05a45="" class="li">
+                        <p data-v-0dc05a45="">
+                            <?php echo $webgg; ?>
+                        </p>
+                    </div>
+                </marquee>
+            </div>
+        </div>
+        <div data-v-be3a9f74="" data-v-0c912c96="" class="nav">
+            <div data-v-be3a9f74="" class="ul" id="show-heng-div">
+                <div data-v-be3a9f74="" class="li" onclick="goToPage(22)">
+
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <a href="<?php echo Url('/index/user/index/token/'.$token); ?>">
+                <img style="width: 90%;margin: 0px 5%;border-radius: 5px;" src="/tu/index_banner_u.png">
+            </a>
+        </div>
+        <div data-v-12171d70="" data-v-0c912c96="" class="box">
+            <div data-v-12171d70="" id="nav">
+                <div data-v-12171d70="" class="Li active">
+                    <p data-v-12171d70=""><?php echo lang('zfb'); ?></p>
+                    <p data-v-12171d70=""></p>
+                </div>
+                <div data-v-12171d70="" class="Li">
+                    <p data-v-12171d70=""><?php echo lang('cje'); ?></p>
+                    <p data-v-12171d70="" class=""></p>
+                </div>
+            </div>
+            <div class="box_btn">
+                <div data-v-12171d70="" class="title">
+                    <p data-v-12171d70="" class="p1"><?php echo lang('mc'); ?></p>
+                    <p data-v-12171d70="" class="p2"><?php echo lang('zxj'); ?></p>
+                    <p data-v-12171d70="" class="p3"><?php echo lang('zg'); ?></p>
+                </div>
+
+
+                <div data-v-12171d70="" class="ul" id="show-list-div">
+
+                </div>
+
+                <div class="el-loading-mask" style="display: none;">
+                    <div class="el-loading-spinner">
+                        <svg viewBox="25 25 50 50" class="circular">
+                            <circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+                        </svg>
+                        <!---->
+                    </div>
+                </div>
+            </div>
+            <div class="box_btn" style="display: none;">
+                <div data-v-12171d70="" class="title1">
+                    <p data-v-12171d70="" class="p1"><?php echo lang('mc'); ?></p>
+                    <p data-v-12171d70="" class="p2"><?php echo lang('zxj'); ?></p>
+                    <p data-v-12171d70="" class="p3"><?php echo lang('cje'); ?></p>
+                </div>
+                <div data-v-12171d70="" class="ul" id="show-list-div-for-chengjiaoe">
+
+                </div>
+            </div>
+        </div>
+        <div data-v-0c912c96="" style="margin-bottom: 50px;"></div>
+        <div data-v-28ad7794="" data-v-0c912c96="" class="box">
+            <div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794=""
+                                                             href="<?php echo Url('/index/index/index/token/'.$token); ?>"
+                                                             class="li"><img data-v-28ad7794="" src="/tu/ico/sy1.png"
+                                                                             alt="">
+                <span data-v-28ad7794="" class="on"><?php echo lang('sy'); ?></span></a>
+            </div>
+            <!--div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794=""
+                                                             href="<?php echo Url('/index/index/hangqing/token/'.$token); ?>"
+                                                             class="li"><img data-v-28ad7794="" src="/tu/ico/hq.png"
+                                                                             alt="">
+                <span data-v-28ad7794="" class="in"><?php echo lang('hq'); ?></span></a>
+            </div-->
+            <div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794="" href="<?php echo Url('/index/order/lixibao/token/'.$token); ?>"
+                                                             class="li"><img data-v-28ad7794="" src="/tu/ico/lc.png"
+                                                                             alt="">
+                <span data-v-28ad7794="" class="in"><?php echo lang('lc'); ?></span></a></div>
+            <div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794="" href="<?php echo url('/index/user/kf/token/'.$token); ?>"
+                                                             class="li"><img
+                    data-v-28ad7794="" src="/tu/ico/kf.png" alt="">
+                <span data-v-28ad7794="" class="in"><?php echo lang('kf'); ?></span></a>
+            </div>
+            <div data-v-28ad7794="" style="flex: 1 1 0%;"><a data-v-28ad7794=""
+                                                             href="<?php echo Url('/index/user/index/token/'.$token); ?>"
+                                                             class="li"><img data-v-28ad7794="" src="/tu/ico/my.png"
+                                                                             alt="">
+                <span data-v-28ad7794="" class="in"><?php echo lang('wd'); ?></span></a></div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/index/index.js">
+    ajaxpro()
+</script>
+<script>
+    function goToPage(pid) {
+        var token = "<?php echo $token; ?>";
+        var url = "/index/goods/goods.html";
+        var urlArr = url.split('.');
+        var nowUrl = urlArr[0] + '/pid/' + pid + '/token/' + token;
+        parent.location = nowUrl;
+    }
+
+    // $(function () {
+    //     var url = '/index/index/getgogao.html';
+    //     $.get(url, function (_res) {
+    //         layer.open({
+    //             content: _res
+    //             , btn: '我知道了'
+    //         });
+    //     })
+    // });
+
+
+    var charturl = '/index/index/getchart.html';
+    $.get(charturl, function (_res) {
+
+        var res = jQuery.parseJSON(Base64.decode(_res));
+        $.each(res, function (k, v) {
+            $('.' + k).html(v);
+        })
+    })
+</script>
+<script>
+    $(function () {
+        $("#nav div").click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            $('.box .box_btn').eq($("#nav div").index(this)).show().siblings('.box .box_btn').hide();
+        });
+    });
+    window.onload = function () {
+        document.addEventListener('touchstart', function (event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        })
+        var lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            var now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+
+            lastTouchEnd = now;
+        }, false)
+    }
+    // 轮播图
+
+    // 初始化swiper
+    var mySwiper2 = new Swiper('.swiper-container', {
+        autoplay: true, //自动滑动
+        speed: 400, //自动滑动开始到结束的时间（单位ms）
+        loop: true, //开启循环
+        loopedSlides: 6, //在loop模式下使用slidesPerview:'auto',还需使用该参数设置所要用到的loop个数。
+        slidesPerView: 'auto', //设置slider容器能够同时显示的slides数量(carousel模式)。另外，支持'auto'值，会根据容器container的宽度调整slides数目。
+        effect: 'coverflow', //可以实现3D效果的轮播,
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        centeredSlides: true, //设定为true时，active slide会居中，而不是默认状态下的居左。
+        coverflow: {
+            rotate: 0, //slide做3d旋转时Y轴的旋转角度。默认50。
+            stretch: 100, //每个slide之间的拉伸值，越大slide靠得越紧。 默认0。
+            depth: 160, //slide的位置深度。值越大z轴距离越远，看起来越小。 默认100。
+            modifier: 1, //depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。默认1。
+        },
+    });
+    $(document).click(function () {
+        $('.langselect').stop().slideUp()
+    })
+    $('#langtarger').click(function (e) {
+        e.stopPropagation()
+        $('.langselect').stop().slideDown()
+    })
+    $('.langselect').on('click', 'li', function () {
+        var data = {'lang': $(this).attr('data-val')};
+        var formurl = "<?php echo Url('login/langSetting'); ?>"
+        var data = data
+        $.post(formurl, data, function (data) {
+            if (data.type == 1) {
+                // layer.msg(data.data, {icon: 1,time: 1000},function(){
+                // });
+                //alert(data.msg)
+                window.location.reload()
+            } else {
+                //alert(data.msg)
+                // layer.msg(data.data, { icon: 2 });
+            }
+        });
+    })
+</script>
+
+
+<div class="layui-layer-move"></div>
+</body>
+
+</html>

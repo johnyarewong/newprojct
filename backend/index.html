@@ -1,0 +1,26 @@
+<title>reload</title>
+
+
+<Script>
+    function refresh() {
+
+        url = location.href;
+
+        console.log(url);
+        var once = url.split("#");
+
+        if (once[1] != 1) {
+
+            url += "h5/index.html";
+
+            console.log(url);
+            //self.location.replace(url);
+
+            window.location.href=url;
+
+        }
+    }
+refresh();
+    //setTimeout('refresh()', 100000);
+
+</script>

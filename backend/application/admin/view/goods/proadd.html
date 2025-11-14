@@ -1,0 +1,420 @@
+{include file="head" /}
+
+{include file="menu" /}
+
+<style>
+.modern-form-container {
+    background: #f5f7fa;
+    padding: 30px 20px;
+    min-height: calc(100vh - 80px);
+}
+
+.modern-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.modern-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 20px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.card-header i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.form-group-modern {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-label-modern {
+    display: block;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.form-label-modern .required {
+    color: #e74c3c;
+    margin-left: 4px;
+}
+
+.form-control-modern {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #fafbfc;
+}
+
+.form-control-modern:focus {
+    outline: none;
+    border-color: #667eea;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-control-modern:hover {
+    border-color: #c5cfd6;
+}
+
+.input-group-modern {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-group-modern .input-addon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+}
+
+.alert-modern {
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    border: none;
+}
+
+.alert-info {
+    background: #e3f2fd;
+    color: #1976d2;
+    border-left: 4px solid #2196f3;
+}
+
+.alert-warning {
+    background: #fff3e0;
+    color: #e65100;
+    border-left: 4px solid #ff9800;
+}
+
+.btn-submit-modern {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 14px 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-submit-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-submit-modern:active {
+    transform: translateY(0);
+}
+
+.page-title {
+    color: #2c3e50;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #667eea;
+    display: inline-block;
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+textarea.form-control-modern {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+select.form-control-modern {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px;
+    appearance: none;
+}
+
+.form-footer {
+    text-align: center;
+    padding: 30px;
+    background: #fafbfc;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+</style>
+
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <div class="modern-form-container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h1 class="page-title">{$pid?'编辑产品':'添加产品'}</h1>
+                    
+                    <form id="formid" method="post">
+                        <!-- 基础信息卡片 -->
+                        <div class="modern-card">
+                            <div class="card-header">
+                                <i class="fa fa-info-circle"></i> 基础信息
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">产品名称 <span class="required">*</span></label>
+                                    <input type="text" class="form-control-modern" value="{$ptitle?$ptitle:''}" placeholder="请输入产品名称" name="ptitle">
+                                </div>
+
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">产品分类 <span class="required">*</span></label>
+                                    <select name="cid" class="form-control-modern">
+                                        <option value="0">请选择分类</option>
+                                        <!-- {volist name="proclass" id="vo"} -->
+                                        <option {if isset($cid) && $cid == $vo['pcid']} selected="selected" {/if} value="{$vo.pcid}">{$vo.pcname}</option>
+                                        <!-- {/volist} -->
+                                    </select>
+                                </div>
+
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">产品代码 <span class="required">*</span></label>
+                                    <input type="text" class="form-control-modern" value="{$procode?$procode:''}" placeholder="请输入产品代码，如：BTCUSD" name="procode">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 风控设置卡片 -->
+                        <div class="modern-card">
+                            <div class="card-header">
+                                <i class="fa fa-shield"></i> 风控设置
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">风控波动范围</label>
+                                    <div class="input-group-modern">
+                                        <span class="input-addon">最小值</span>
+                                        <input type="text" value="{$point_low?$point_low:''}" class="form-control-modern" placeholder="0" name="point_low">
+                                        <span class="input-addon">最大值</span>
+                                        <input type="text" value="{$point_top?$point_top:''}" class="form-control-modern" placeholder="0" name="point_top">
+                                    </div>
+                                    <div class="alert-modern alert-warning">
+                                        <strong>💡 说明：</strong> 客户订单在条件范围内时，会根据订单的涨或跌，自动减或加最小值与最大值之间的随机数。留空或填0则不开启风控。
+                                    </div>
+                                </div>
+
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">随机波动范围</label>
+                                    <input type="text" class="form-control-modern" placeholder="如：5" name="rands" value="{$rands?$rands:''}">
+                                    <div class="alert-modern alert-info">
+                                        <strong>💡 说明：</strong> 产品获取接口值后，会加上±此处的值。例如填5，则在接口获取的数据中加上-5~5之间的随机数。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 交易参数卡片 -->
+                        <div class="modern-card">
+                            <div class="card-header">
+                                <i class="fa fa-cog"></i> 交易参数
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">时间玩法间隔</label>
+                                    <input type="text" class="form-control-modern" value="{$protime?$protime:''}" placeholder="如：1,3,5,8（单位：分钟）" name="protime">
+                                    <div class="alert-modern alert-info">
+                                        <strong>💡 说明：</strong> 例如时间为1分、3分、5分、8分，则用英文逗号分隔输入：1,3,5,8。如没有此玩法则留空。必须为四个。
+                                    </div>
+                                </div>
+
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">盈亏比例 <span class="required">*</span></label>
+                                    <input type="text" class="form-control-modern" value="{$proscale?$proscale:''}" placeholder="如：75,77,80,85（单位：%）" name="proscale">
+                                    <div class="alert-modern alert-warning">
+                                        <strong>💡 说明：</strong> 例如比例为75%、77%、80%、85%，则用英文逗号分隔输入：75,77,80,85。必须为四个，且不得为空。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 开市时间卡片 -->
+                        <div class="modern-card">
+                            <div class="card-header">
+                                <i class="fa fa-clock-o"></i> 开市时间设置
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">每周交易时间</label>
+                                    
+                                    <div class="time-grid">
+                                        <div class="input-group-modern" style="margin-bottom: 15px;">
+                                            <span class="input-addon">周一</span>
+                                            <input type="text" value="{$opentime[0]?$opentime[0]:''}" class="form-control-modern" placeholder="00:00~18:00 或 00:00~03:00|08:00~24:00" name="opentime[1]">
+                                        </div>
+
+                                        <div class="input-group-modern" style="margin-bottom: 15px;">
+                                            <span class="input-addon">周二</span>
+                                            <input type="text" value="{$opentime[1]?$opentime[1]:''}" class="form-control-modern" placeholder="00:00~18:00 或 00:00~03:00|08:00~24:00" name="opentime[2]">
+                                        </div>
+
+                                        <div class="input-group-modern" style="margin-bottom: 15px;">
+                                            <span class="input-addon">周三</span>
+                                            <input type="text" value="{$opentime[2]?$opentime[2]:''}" class="form-control-modern" placeholder="00:00~18:00 或 00:00~03:00|08:00~24:00" name="opentime[3]">
+                                        </div>
+
+                                        <div class="input-group-modern" style="margin-bottom: 15px;">
+                                            <span class="input-addon">周四</span>
+                                            <input type="text" value="{$opentime[3]?$opentime[3]:''}" class="form-control-modern" placeholder="00:00~18:00 或 00:00~03:00|08:00~24:00" name="opentime[4]">
+                                        </div>
+
+                                        <div class="input-group-modern" style="margin-bottom: 15px;">
+                                            <span class="input-addon">周五</span>
+                                            <input type="text" value="{$opentime[4]?$opentime[4]:''}" class="form-control-modern" placeholder="00:00~18:00 或 00:00~03:00|08:00~24:00" name="opentime[5]">
+                                        </div>
+
+                                        <div class="input-group-modern" style="margin-bottom: 15px;">
+                                            <span class="input-addon">周六</span>
+                                            <input type="text" value="{$opentime[5]?$opentime[5]:''}" class="form-control-modern" placeholder="00:00~18:00 或 00:00~03:00|08:00~24:00" name="opentime[6]">
+                                        </div>
+
+                                        <div class="input-group-modern" style="margin-bottom: 15px;">
+                                            <span class="input-addon">周日</span>
+                                            <input type="text" value="{$opentime[6]?$opentime[6]:''}" class="form-control-modern" placeholder="00:00~18:00 或 00:00~03:00|08:00~24:00" name="opentime[7]">
+                                        </div>
+                                    </div>
+
+                                    <div class="alert-modern alert-warning">
+                                        <strong>💡 说明：</strong> 
+                                        <ul style="margin: 8px 0 0 0; padding-left: 20px;">
+                                            <li>连续时间段：直接输入 00:00~18:00</li>
+                                            <li>多个时间段：用竖线分隔，如：00:00~03:00|08:00~24:00</li>
+                                            <li>不开市：留空即可</li>
+                                            <li>注意：必须使用英文符号，时间格式要准确</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 备注信息卡片 -->
+                        <div class="modern-card">
+                            <div class="card-header">
+                                <i class="fa fa-file-text-o"></i> 备注信息
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">备注</label>
+                                    <textarea name="content" class="form-control-modern" placeholder="请输入产品相关备注信息...">{$content?$content:''}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 提交按钮 -->
+                        <input type="hidden" name="pid" value="{$pid?$pid:''}">
+                        <div class="form-footer">
+                            <input type="submit" class="btn-submit-modern" onclick="return editpro(this.form)" value="{$pid?'保存修改':'添加产品'}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<!--main content end-->
+
+
+{include file="foot" /}
+<script>
+
+function editpro(form){
+
+	var ptitle = form.ptitle.value;
+	var cid = form.cid.value;
+	var point_low = form.point_low.value;
+	var point_top = form.point_top.value;
+	var rands = form.rands.value;
+  var procode = form.procode.value;
+  var proscale = form.proscale.value;
+
+	if(!ptitle){
+		layer.msg('请输入产品名称'); 
+	    return false;
+	}
+
+	if(!cid || cid == 0){
+		layer.msg('请选择分类'); 
+	    return false;
+	}
+
+
+
+	if(point_low < 0 || isNaN(point_low) || point_top < 0 || isNaN(point_top) || rands < 0 || isNaN(rands)){
+		layer.msg('风控值应为大于0的数字'); 
+	    return false;
+	}
+
+	if(point_low > point_top ){
+		layer.msg('风控最小值应该小于最大值'); 
+	    return false;
+	}
+
+  if(!procode ){
+    layer.msg('请输入产品代码！'); 
+      return false;
+  }
+
+  if(!proscale ){
+    layer.msg('请输入盈亏比例！'); 
+      return false;
+  }
+
+
+
+
+	var formurl = "{:Url('goods/proadd')}"
+    var data = $('#formid').serialize();
+    var locurl = "{:Url('admin/goods/prolist')}";
+
+    WPpost(formurl,data,locurl);
+
+
+
+
+	return false;
+
+}
+
+
+</script>

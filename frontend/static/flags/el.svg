@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <!-- 蓝色横条 -->
+  <rect width="600" height="44.44" y="0" fill="#0D5EAF"/>
+  <rect width="600" height="44.44" y="88.88" fill="#0D5EAF"/>
+  <rect width="600" height="44.44" y="177.76" fill="#0D5EAF"/>
+  <rect width="600" height="44.44" y="266.64" fill="#0D5EAF"/>
+  <rect width="600" height="44.44" y="355.56" fill="#0D5EAF"/>
+  
+  <!-- 白色横条 -->
+  <rect width="600" height="44.44" y="44.44" fill="#FFF"/>
+  <rect width="600" height="44.44" y="133.32" fill="#FFF"/>
+  <rect width="600" height="44.44" y="222.2" fill="#FFF"/>
+  <rect width="600" height="44.44" y="311.08" fill="#FFF"/>
+  
+  <!-- 左上角蓝色方块和白色十字 -->
+  <rect width="222.2" height="222.2" fill="#0D5EAF"/>
+  <rect width="44.44" height="222.2" x="88.88" fill="#FFF"/>
+  <rect width="222.2" height="44.44" y="88.88" fill="#FFF"/>
+</svg>
+
+
+

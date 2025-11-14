@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USD/CNH 产品配置</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .step { background: #f8f9fa; border-left: 4px solid #007bff; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .button { display: inline-block; background: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 10px 5px; font-weight: bold; transition: all 0.3s; }
+        .button:hover { background: #0056b3; transform: translateY(-2px); }
+        .setup-button { background: #28a745; }
+        .setup-button:hover { background: #1e7e34; }
+        .test-button { background: #ffc107; color: #212529; }
+        .test-button:hover { background: #e0a800; }
+        .result { background: #f8f9fa; padding: 15px; margin: 15px 0; border-radius: 6px; min-height: 50px; border: 1px dashed #ccc; }
+        h1 { text-align: center; color: #333; margin-bottom: 30px; }
+        h2 { color: #495057; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💱 USD/CNH 产品配置向导</h1>
+        
+        <div class="step">
+            <h2>步骤1: 测试数据源</h2>
+            <p>首先测试USD/CNH的数据源是否可用</p>
+            <a href="test_usdcnh_sources.php" class="button test-button" target="_blank">🔍 测试数据源</a>
+        </div>
+        
+        <div class="step">
+            <h2>步骤2: 一键配置USD/CNH</h2>
+            <p>自动添加USD/CNH产品到数据库并配置所有必要设置</p>
+            <button class="button setup-button" onclick="setupUSDCNH()">🚀 自动配置USD/CNH</button>
+            <div id="setup-result" class="result"></div>
+        </div>
+        
+        <div class="step">
+            <h2>步骤3: 功能测试</h2>
+            <p>测试USD/CNH的各项功能是否正常</p>
+            
+            <h3>基础功能测试:</h3>
+            <button class="button" onclick="testRealTimeData()">📊 实时数据</button>
+            <button class="button" onclick="testKlineData()">📈 K线数据</button>
+            <div id="test-result" class="result"></div>
+            
+            <h3>手动测试链接:</h3>
+            <p>
+                <a href="http://127.0.0.1:8071/index.php/index/api/getprodata?pid=27" class="button" target="_blank">实时数据 (PID=27)</a>
+                <a href="http://127.0.0.1:8071/index.php/index/api/getkdata?pid=27&num=30&interval=5" class="button" target="_blank">K线数据 (5分钟)</a>
+            </p>
+        </div>
+        
+        <div class="step">
+            <h2>步骤4: 验证完成</h2>
+            <p>检查USD/CNH是否在系统中正常显示和工作</p>
+            <p style="color: #28a745;"><strong>✅ 如果以上测试都成功，USD/CNH就可以在交易系统中正常使用了！</strong></p>
+        </div>
+    </div>
+
+    <script>
+        function makeRequest(url, resultElementId, description) {
+            const resultElement = document.getElementById(resultElementId);
+            resultElement.innerHTML = '<p>正在请求: ' + url + '</p><p>请等待...</p>';
+            
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    resultElement.innerHTML = '<h4>' + description + ' - 成功</h4><pre style="max-height: 300px; overflow: auto;">' + data + '</pre>';
+                })
+                .catch(error => {
+                    resultElement.innerHTML = '<h4>' + description + ' - 失败</h4><p style="color: red;">' + error.message + '</p>';
+                });
+        }
+        
+        function setupUSDCNH() {
+            makeRequest('http://127.0.0.1:8071/index.php/index/api/setup_usdcnh', 'setup-result', 'USD/CNH自动配置');
+        }
+        
+        function testRealTimeData() {
+            makeRequest('http://127.0.0.1:8071/index.php/index/api/getprodata?pid=27', 'test-result', '实时数据测试');
+        }
+        
+        function testKlineData() {
+            makeRequest('http://127.0.0.1:8071/index.php/index/api/getkdata?pid=27&num=30&interval=5', 'test-result', 'K线数据测试');
+        }
+    </script>
+</body>
+</html>
+
+
+

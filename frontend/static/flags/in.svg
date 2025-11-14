@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20">
+  <!-- 橙色条纹 -->
+  <rect width="30" height="6.67" fill="#ff9933"/>
+  <!-- 白色条纹 -->
+  <rect y="6.67" width="30" height="6.67" fill="#ffffff"/>
+  <!-- 绿色条纹 -->
+  <rect y="13.33" width="30" height="6.67" fill="#138808"/>
+  <!-- 蓝色轮子 -->
+  <circle cx="15" cy="10" r="3" fill="none" stroke="#000080" stroke-width="0.5"/>
+  <g fill="#000080">
+    <circle cx="15" cy="7" r="0.2"/>
+    <circle cx="17.6" cy="8" r="0.2"/>
+    <circle cx="18" cy="10" r="0.2"/>
+    <circle cx="17.6" cy="12" r="0.2"/>
+    <circle cx="15" cy="13" r="0.2"/>
+    <circle cx="12.4" cy="12" r="0.2"/>
+    <circle cx="12" cy="10" r="0.2"/>
+    <circle cx="12.4" cy="8" r="0.2"/>
+  </g>
+</svg>

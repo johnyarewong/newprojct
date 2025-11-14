@@ -1,0 +1,14 @@
+.profile-pic img {
+	 border-radius: 0%;
+    -webkit-border-radius: 0%;
+  	height: 200px;
+    width: 200px;
+   border: 2px solid rgba(101, 206, 167, 0.53);
+
+}
+.xz-tuiguang{
+	text-align: center;
+    color: #65CEA7;
+    padding: 20px 0;
+}
+
